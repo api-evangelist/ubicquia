@@ -1,0 +1,13 @@
+generated: '2026-09-01'
+method: searched
+source: https://www.ubicquia.com/contact-us-to-purchase (HTTP 200); https://www.ubicquia.com/book-a-demo
+  (HTTP 200); www.ubicquia.com/sitemap.xml (105 URLs, no /pricing or /plans page); www.ubicquia.com/llms.txt
+plan_count: 0
+plans: []
+pricing_model: quote-only
+notes: 'Ubicquia publishes no price list, no tiers and no self-serve purchase path. The commercial motion
+  is enterprise: the site routes buyers to "Contact Us to Purchase" and "Book a Demo" forms, and sells
+  through utility, municipal, agent, reseller and specifier partner programs (www.ubicquia.com/partners).
+  Hardware plus the UbiVu subscription is quoted per deployment. Two published ROI documents (the Utility
+  ROI Analysis Report and the Lighting Control Cost Analysis) model customer savings, not Ubicquia list
+  prices, so neither is a pricing source. plan_count 0 is a measured absence, not an unchecked field.'

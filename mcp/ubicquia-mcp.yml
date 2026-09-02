@@ -1,0 +1,218 @@
+generated: '2026-09-01'
+method: derived
+status: candidate
+source: openapi/ubicquia-config-api-openapi-original.json
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+server:
+  name: ubicquia
+  transport: null
+  url: null
+notes: Ubicquia publishes no MCP server. Probed https://mcp.ubicquia.com/mcp (DNS NXDOMAIN), https://api.ubicquia.com/mcp
+  (404 "The route mcp could not be found."), https://config.api.ubicquia.com/mcp (405, GET-only SPA route)
+  and https://www.ubicquia.com/mcp (404); no MCP package exists on npm or PyPI. The tools below are a
+  CANDIDATE surface derived one-for-one from the 39 operations in the published OpenAPI - nobody ships
+  this. No MCPServer pointer is wired in apis.yml, because that pointer would assert a server the provider
+  does not run.
+tool_count: 39
+tools:
+- name: index
+  description: Get all data
+  method: GET
+  path: /AuthCheck
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#index
+- name: store
+  description: Add fulfillment Details
+  method: POST
+  path: /fulfillment-detail
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#store
+- name: destroy
+  description: Delete fulfillment Details
+  method: POST
+  path: /delete-fulfillment-detail
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#destroy
+- name: fulfillment_detail_update
+  description: Upadate fulfillment Details
+  method: POST
+  path: /fulfillment-detail-update
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#fulfillment-detail-update
+- name: extended_fulfillment_detail
+  description: Extended fulfillment Details
+  method: POST
+  path: /extended-fulfillment-detail
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#extended-fulfillment-detail
+- name: extended_fulfillment_detail_update
+  description: Extended fulfillment Details Update
+  method: POST
+  path: /extended-fulfillment-detail-update
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#extended-fulfillment-detail-update
+- name: fulfillment_detail_status
+  description: get fulfillment detail status
+  method: GET
+  path: /fulfillment-detail-status
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#/fulfillment-detail-status
+- name: updateIccidRecord
+  description: Update ICCID master status
+  method: PUT
+  path: /iccid-master/update/{iccid}
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#updateIccidRecord
+- name: updateIccidMasterFile
+  description: Upload ICCID master CSV for bulk update
+  method: POST
+  path: /update-iccid-master-file
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#updateIccidMasterFile
+- name: deleteIccidMasterFile
+  description: Upload ICCID master CSV for bulk delete
+  method: POST
+  path: /delete-iccid-master-file
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#deleteIccidMasterFile
+- name: getIccidMasterList
+  description: Get paginated ICCID master list
+  method: GET
+  path: /get-iccid-master-list
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#getIccidMasterList
+- name: getIccidMasterLatestLog
+  description: Get latest ICCID master file upload status
+  method: GET
+  path: /log/iccid-master
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#getIccidMasterLatestLog
+- name: getIccidMasterFailedCsv
+  description: Download latest failed ICCID master CSV log
+  method: GET
+  path: /get-latest-failed-log/{type}
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#getIccidMasterFailedCsv
+- name: update
+  description: Update Sales Order by id
+  method: PUT
+  path: /update-sales-order
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#update
+- name: destroy
+  description: Deletes Sales order by id
+  method: DELETE
+  path: /delete-sales-order
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#destroy
+- name: get_sales_order_sales_order_number
+  description: get sales order detail
+  method: GET
+  path: /get-sales-order/{sales_order_number}
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#/get-sales-order/{sales_order_number}
+- name: add_sales_order
+  description: Add Sales Order by async
+  method: POST
+  path: /add-sales-order
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#add-sales-order
+- name: get_sales_order_status
+  description: get sales order status
+  method: GET
+  path: /get-sales-order-status
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#/get-sales-order-status
+- name: add_sales_order_config
+  description: Add Sales Order on Config
+  method: POST
+  path: /add-sales-order-config
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#add-sales-order-config
+- name: update
+  description: Update Serial Number
+  method: POST
+  path: /update-production-file
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#update
+- name: destroy
+  description: Delete Serial Number
+  method: POST
+  path: /delete-production-file
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#destroy
+- name: getcustid
+  description: Get Customer Id
+  method: POST
+  path: /get-customer-id
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#getcustid
+- name: get_serial_number_list
+  description: Get all serial number details
+  method: GET
+  path: /get-serial-number-list
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#get-serial-number-list
+- name: check_uploaded_production_file_status
+  description: Get check uploaded production file status
+  method: GET
+  path: /check-uploaded-production-file-status
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#check-uploaded-production-file-status
+- name: get_production_file_list
+  description: Get all production file details
+  method: GET
+  path: /get-production-file-list
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#get-production-file-list
+- name: update
+  description: Update transformer details
+  method: POST
+  path: /update-transformer-file
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#update
+- name: destroy
+  description: Delete transformer details
+  method: POST
+  path: /delete-transformer-file
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#destroy
+- name: get_transformer_file_list
+  description: Get all transformer file list
+  method: GET
+  path: /get-transformer-file-list
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#get-transformer-file-list
+- name: check_uploaded_file_status
+  description: Get check uploaded file status
+  method: GET
+  path: /check-uploaded-file-status
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#check-uploaded-file-status
+- name: get_transformer_file_by_id
+  description: Get transformer file by id
+  method: GET
+  path: /get-transformer-file-by-id/{id}
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#get-transformer-file-by-id
+- name: get_coil_file_by_id
+  description: Get transformer file by id
+  method: GET
+  path: /get-coil-file-by-id/{id}
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#get-coil-file-by-id
+- name: update_coil
+  description: Update coil transformer details
+  method: POST
+  path: /update-coil-file
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#update-coil
+- name: destroy_coil
+  description: Delete coil details
+  method: POST
+  path: /delete-coil-file
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#destroy-coil
+- name: store
+  description: Add User
+  method: POST
+  path: /add-user
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#store
+- name: update
+  description: Update user id
+  method: PUT
+  path: /update-user/{id}
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#update
+- name: destroy
+  description: Deletes User by id
+  method: DELETE
+  path: /delete-user/{id}
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#destroy
+- name: get_user_id
+  description: get User By User Id
+  method: GET
+  path: /get-user/{id}
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#/get-user/{id}
+- name: update_me
+  description: Update Me
+  method: POST
+  path: /update-me
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#update me
+- name: changeUserCustomerStatus
+  description: change User Customer Status
+  method: PUT
+  path: /changeUserCustomerStatus/{id}
+  source_operation: openapi/ubicquia-config-api-openapi-original.json#changeUserCustomerStatus

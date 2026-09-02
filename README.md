@@ -64,5 +64,13 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Ubicquia is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Ubicquia is a Fort Lauderdale, Florida intelligent-infrastructure company that turns streetlights, distribution transformers, and substations that cities and utilities already own into connected, AI-monitored assets. Its plug-in hardware family — UbiCell, UbiHub / UbiHub AI+, UbiGrid DTM+, UbiMetro and UbiSmart AQM+ — feeds the UbiVu analytics and asset-management platform.
+
+## Public API surface
+
+- **Ubicquia Config API** — OpenAPI 3.0.0, 39 operations, served publicly at <https://config.api.ubicquia.com/docs>. Covers sales orders, fulfillment details, device serial numbers and production files, distribution transformer and coil files, ICCID (cellular SIM) master inventory, customer lookup and user administration. Authenticated with an `x-api-key` header.
+- **`/.well-known/security.txt`** — served on www.ubicquia.com (RFC 9116), contact `security@ubicquia.com`.
+- **`llms.txt`** — served on www.ubicquia.com.
+- No MCP server, no A2A agent card, no public SDK, no GitHub organization, no status page, no published pricing and no documented rate limits were found. Each absence is recorded with the URL probed and the status it returned.
+
+- https://www.ubicquia.com/

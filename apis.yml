@@ -1,18 +1,58 @@
 aid: ubicquia
 name: Ubicquia
-description: 'Ubicquia is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Ubicquia is a Fort Lauderdale, Florida intelligent-infrastructure company that turns
+  streetlights, distribution transformers, and substations that cities and utilities already own into
+  connected, AI-monitored assets. Its plug-in hardware family — UbiCell (NEMA-socket streetlight
+  controller), UbiHub and UbiHub AI+ (streetlight gigabit switch with cameras, edge AI and LTE),
+  UbiGrid DTM+ (distribution transformer monitoring), UbiMetro (streetlight small cell) and UbiSmart
+  AQM+ (air quality) — feeds the UbiVu analytics and asset-management platform, which the company
+  states analyzes 4.3 billion data points daily. Ubicquia serves cities, electric utilities, public
+  safety agencies and enterprises across grid monitoring, intelligent streetlighting, power quality,
+  safety and security, street audit, substation monitoring, and traffic and curb management. It
+  publicly serves an OpenAPI 3.0 description of its device configuration, provisioning and sales-order
+  API at config.api.ubicquia.com, and raised a $106M Series D in 2026.'
 url: https://raw.githubusercontent.com/api-evangelist/ubicquia/refs/heads/main/apis.yml
+image: https://cdn.sanity.io/images/1851a3wt/production/6092260ef60a7711ec4ef0ae4785609ee5608d86-3072x1726.webp?w=1200&h=630&fit=crop&auto=format
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-09-01'
 modified: '2026-09-01'
 tags:
 - Company
-apis: []
+- Smart Cities
+- Internet of Things
+- Energy
+- Utilities
+- Electric Grid
+- Streetlights
+- Public Safety
+- Infrastructure
+- Sensors
+- Edge AI
+- Transformer Monitoring
+apis:
+- aid: ubicquia:ubicquia-config-api
+  name: Ubicquia Config API
+  description: 'The publicly described Ubicquia configuration and provisioning API ("Ubi Api",
+    OpenAPI 3.0.0, 39 operations) covering sales orders, fulfillment details, device serial numbers
+    and production files, distribution transformer and coil files, ICCID (cellular SIM) master
+    records, customer lookup and user administration. Authenticated with an x-api-key header; the
+    interactive Swagger UI at the same host redirects to a login, while the raw OpenAPI document is
+    served publicly at /docs.'
+  humanURL: https://config.api.ubicquia.com/
+  baseURL: https://config.api.ubicquia.com/api/
+  tags:
+  - Configuration
+  - Provisioning
+  - Devices
+  - Transformers
+  - Sales Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/ubicquia-config-api-openapi-original.json
+  - type: Overlay
+    url: overlays/ubicquia-config-api-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +60,92 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://www.ubicquia.com/
+- type: Blog
+  url: https://www.ubicquia.com/blog
+- type: Support
+  url: https://www.ubicquia.com/info-and-manuals-support
+- type: TermsOfService
+  url: https://www.ubicquia.com/terms
+- type: PrivacyPolicy
+  url: https://www.ubicquia.com/privacy
+- type: SignUp
+  url: https://www.ubicquia.com/book-a-demo
+- type: Pricing
+  url: https://www.ubicquia.com/contact-us-to-purchase
+- type: Compliance
+  url: https://www.ubicquia.com/insights/the-ubicquia-security-program
+- type: Security
+  url: https://www.ubicquia.com/.well-known/security.txt
+- type: SecurityTxt
+  url: well-known/ubicquia-security.txt
+- type: WellKnown
+  url: well-known/ubicquia-well-known.yml
+- type: LLMsTxt
+  url: llms/ubicquia-llms.txt
+- type: Authentication
+  url: authentication/ubicquia-authentication.yml
+- type: Conventions
+  url: conventions/ubicquia-conventions.yml
+- type: ErrorCatalog
+  url: errors/ubicquia-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/ubicquia-lifecycle.yml
+- type: Conformance
+  url: conformance/ubicquia-conformance.yml
+- type: DataModel
+  url: data-model/ubicquia-data-model.yml
+- type: Packages
+  url: packages/ubicquia-packages.yml
+- type: Plans
+  url: plans/ubicquia-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/ubicquia-rate-limits.yml
+- type: DomainSecurity
+  url: security/ubicquia-domain-security.yml
+- type: VulnerabilityDisclosure
+  url: security/ubicquia-vulnerability-disclosure.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-pointer-verification:
+  checked: '2026-09-01'
+  method: 'GET with a browser User-Agent, redirects followed'
+  results:
+  - {type: Website, url: 'https://www.ubicquia.com/', status: 200}
+  - {type: Blog, url: 'https://www.ubicquia.com/blog', status: 200}
+  - {type: Support, url: 'https://www.ubicquia.com/info-and-manuals-support', status: 200}
+  - {type: TermsOfService, url: 'https://www.ubicquia.com/terms', status: 200}
+  - {type: PrivacyPolicy, url: 'https://www.ubicquia.com/privacy', status: 200}
+  - {type: SignUp, url: 'https://www.ubicquia.com/book-a-demo', status: 200}
+  - {type: Pricing, url: 'https://www.ubicquia.com/contact-us-to-purchase', status: 200}
+  - {type: Compliance, url: 'https://www.ubicquia.com/insights/the-ubicquia-security-program', status: 200}
+  - {type: Security, url: 'https://www.ubicquia.com/.well-known/security.txt', status: 200}
+  - {type: humanURL, url: 'https://config.api.ubicquia.com/', status: 200}
+  - {type: baseURL, url: 'https://config.api.ubicquia.com/api/', status: 200}
+  not_emitted:
+  - {type: DeveloperPortal, reason: 'No developer portal exists. config.api.ubicquia.com/api/documentation 302s to the login SPA.'}
+  - {type: Documentation, reason: 'No public human API documentation was found; only the raw OpenAPI at /docs is served anonymously.'}
+  - {type: APIReference, reason: 'Same as Documentation - the Swagger UI is login-gated.'}
+  - {type: GettingStarted, reason: 'No quickstart page published.'}
+  - {type: GitHubOrganization, reason: 'api.github.com/orgs/ubicquia returned 404; no Ubicquia GitHub org exists.'}
+  - {type: Roadmap, reason: 'No public roadmap page in the 105-URL sitemap.'}
+  - {type: Postman, reason: 'No public Postman collection or workspace found.'}
+  - {type: StatusPage, reason: 'status.ubicquia.com does not resolve (DNS NXDOMAIN).'}
+  - {type: Deprecation, reason: 'No deprecation or sunset policy is published.'}
+  - {type: ChangeLog, reason: 'Blog and Newsroom exist but no dated API/product changelog.'}
+  - {type: SDKs, reason: 'No first-party client library on npm, PyPI, RubyGems or crates.io.'}
+  - {type: CLI, reason: 'No first-party CLI.'}
+  - {type: Sandbox, reason: 'No sandbox, test mode or test credentials are published.'}
+  - {type: MCPServer, reason: 'No MCP server exists; mcp/ubicquia-mcp.yml records a derived candidate with deployment.mode none, so no pointer is asserted.'}
+  - {type: ToolCrosswalk, reason: 'Requires an MCP or GraphQL surface alongside the OpenAPI; neither exists.'}
+  - {type: AgentCard, reason: '/.well-known/agent-card.json and /.well-known/agent.json both 404 on every host; per contract nothing was written.'}
+  - {type: AsyncAPI, reason: 'No AsyncAPI document and no webhook catalog is published.'}
+  - {type: Webhooks, reason: 'No webhook surface is documented anywhere on ubicquia.com or in the OpenAPI.'}
+  - {type: Idempotency, reason: 'No Idempotency-Key exists anywhere in the 39-operation surface.'}
+  - {type: OAuthScopes, reason: 'The only securityScheme is apiKey; derive-oauth-scopes.py found no oauth2 flows.'}
+  - {type: TrustCenter, reason: 'probe-security-programs.py found no trust.ubicquia.com or trust-center page; the compliance detail lives on the Security Program insight page instead.'}
+x-enrichment:
+  date: '2026-09-01'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1

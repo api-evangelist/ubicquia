@@ -1,0 +1,161 @@
+generated: '2026-09-01'
+method: derived
+source: openapi/ubicquia-config-api-openapi-original.json (operation parameters, requestBodies and response
+  examples); https://config.api.ubicquia.com/docs
+authentication:
+  style: api-key-header
+  header: x-api-key
+  scheme_name: Api Key
+  applied: 'every one of the 39 operations declares security: [{Api Key: []}]'
+  note: 'The spec description states: "Use header x-api-key: ''key'' to send api key endpoints". There
+    is no OAuth, no bearer token and no refresh flow. GET /AuthCheck exists solely to verify a key.'
+  cross_reference: authentication/ubicquia-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  evidence: No Idempotency-Key parameter, header or request-body field appears anywhere in the 39 operations,
+    and the docs publish no retry-safety contract. Several writes are additionally NOT naturally idempotent
+    (POST /add-sales-order, POST /fulfillment-detail).
+  note: No Idempotency pointer is wired in apis.yml, because the provider ships no idempotency contract.
+pagination:
+  style: laravel-length-aware-paginator
+  request_params:
+  - page
+  - per_page
+  response_fields:
+  - data[]
+  - links.first
+  - links.last
+  - links.prev
+  - links.next
+  - meta.current_page
+  - meta.per_page
+  - meta.total
+  operations:
+  - getIccidMasterList
+  - get-serial-number-list
+  - get-production-file-list
+  - get-transformer-file-list
+  evidence: getIccidMasterListResponse / paginateGetSerialNumberDetailResponse / paginateProductionFileDetailResponse
+    examples all carry a links block whose first URL is http://hostname/api/get-iccid-master-list?page=1
+sorting:
+  params:
+  - sort_by
+  - sort_dir
+  operations:
+  - get-production-file-list
+  - get-transformer-file-list
+  - getIccidMasterList
+filtering:
+  params:
+  - q
+  - search_type
+  - customer_id
+  - so_number
+  - file_type
+  - start_date_time
+  - end_date_time
+  note: Free-text search is a q + search_type pair; date windows use start_date_time / end_date_time.
+field_expansion:
+  supported: false
+  note: No expand/fields/include parameter is declared.
+metadata:
+  supported: false
+  note: No customer-controlled metadata bag on any resource.
+request_tracing:
+  header: null
+  body_field: request_id
+  evidence: successGetFulfillmentDetailsStoreResponse returns request_id ("Request Id of job"). No X-Request-Id
+    response header is documented.
+async_jobs:
+  pattern: submit-then-poll
+  description: Bulk and file-ingest writes return immediately with a job handle and are completed in the
+    background; the caller polls a status operation.
+  submit_then_poll:
+  - submit: add-sales-order
+    poll: get-sales-order-status
+  - submit: store (POST /fulfillment-detail)
+    poll: GET /fulfillment-detail-status
+  - submit: update (POST /update-production-file)
+    poll: check-uploaded-production-file-status
+  - submit: update (POST /update-transformer-file)
+    poll: check-uploaded-file-status
+  - submit: updateIccidMasterFile
+    poll: getIccidMasterLatestLog
+  failure_retrieval: getIccidMasterFailedCsv (GET /get-latest-failed-log/{type}) returns a CSV of the
+    rows that failed, columns iccid,status,reason.
+versioning:
+  scheme: none-in-path
+  current: 0.0.1 (info.version)
+  note: The base path is /api/ with no version segment, header or date pin. Responses carry a "version"
+    field in the envelope, which the examples fill with the literal placeholder "value" - it is not a
+    usable API version signal.
+  cross_reference: lifecycle/ubicquia-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  fields:
+  - status
+  - code
+  - message
+  - data
+  - version
+  rfc9457: false
+  cross_reference: errors/ubicquia-problem-types.yml
+rate_limit_signaling:
+  documented: false
+  headers: []
+  status_on_exhaustion: null
+  note: No 429 response and no RateLimit-* / X-RateLimit-* / Retry-After header is declared on any operation.
+  cross_reference: rate-limits/ubicquia-rate-limits.yml
+dry_run_mode:
+  supported: false
+  note: No preview/validate-only parameter is declared on any write.
+reversibility:
+  grade: absent
+  applicable: true
+  summary: The API has a substantial write surface (17 of 39 operations mutate state, including seven
+    destructive delete operations) and publishes NO reversal operation and NO reversal window.
+  write_surface:
+    total_operations: 39
+    write_operations: 17
+    destructive_operations: 7
+  reversal_operations: []
+  destructive_without_reversal:
+  - operation: destroy (POST /delete-fulfillment-detail)
+    reversal: null
+    window: null
+  - operation: destroy (DELETE /delete-sales-order)
+    reversal: null
+    window: null
+  - operation: destroy (POST /delete-production-file)
+    reversal: null
+    window: null
+  - operation: destroy (POST /delete-transformer-file)
+    reversal: null
+    window: null
+  - operation: destroy-coil (POST /delete-coil-file)
+    reversal: null
+    window: null
+  - operation: destroy (DELETE /delete-user/{id})
+    reversal: null
+    window: null
+  - operation: deleteIccidMasterFile (POST /delete-iccid-master-file)
+    reversal: null
+    window: null
+    note: Bulk CSV-driven delete across the whole ICCID inventory - the highest-consequence unreversible
+      call in the surface.
+  soft_delete_signal:
+    observed: true
+    evidence: SerialNumberDetail and TransformerDetail schemas declare a deleted_at field, and paginateProductionFileDetailResponse
+      / getTransformerFileDetailResponse examples return deleted_at - the Laravel soft-delete marker.
+    caveat: A deleted_at column implies rows are retained, but NO restore/undelete operation is exposed
+      and NO retention window is stated anywhere in the spec or the public docs. An agent must treat every
+      delete here as final. This artifact deliberately records no window, because inventing one is the
+      error that could cost a user real money.
+  note: 'reversibility is graded absent (not na): the API is not read-only.'
+cross_references:
+- authentication/ubicquia-authentication.yml
+- errors/ubicquia-problem-types.yml
+- lifecycle/ubicquia-lifecycle.yml
+- rate-limits/ubicquia-rate-limits.yml
+- data-model/ubicquia-data-model.yml

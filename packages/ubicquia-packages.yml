@@ -1,0 +1,13 @@
+generated: '2026-09-01'
+method: searched
+source: registry.npmjs.org search, pypi.org, rubygems.org, crates.io, api.github.com/orgs/ubicquia and
+  api.github.com/search/repositories, plus www.ubicquia.com and its llms.txt index
+packages: []
+package_count: 0
+official_count: 0
+notes: No first-party Ubicquia client library exists on any public registry. npm registry search for "ubicquia"
+  returned 0 objects; pypi.org/pypi/ubicquia/json returned "Not Found"; rubygems.org and crates.io both
+  returned no gem/crate. There is no github.com/ubicquia organization (api.github.com/orgs/ubicquia ->
+  404) and a repository search returned only two unrelated third-party repos. The published OpenAPI describes
+  an x-api-key HTTP API with no SDK distribution of any kind, so version/published fields are recorded
+  as absent rather than null-per-package - there are no packages to date.

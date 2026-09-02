@@ -1,0 +1,185 @@
+generated: '2026-09-01'
+method: derived
+source: openapi/ubicquia-config-api-openapi-original.json
+domain: Device manufacturing, provisioning and fulfillment for Ubicquia streetlight and grid hardware
+  - sales orders, serial numbers and production files, distribution transformer and coil files, cellular
+  ICCID inventory, customers and users.
+entity_count: 14
+entities:
+- entity: ApiRequestLog
+  fields:
+  - id
+  - userId
+  - utcTime
+  - duration
+  - createdAt
+  - updatedAt
+  field_count: 6
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/ApiRequestLog
+- entity: Country
+  fields: []
+  field_count: 0
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/Country
+- entity: FactoryConfigs
+  fields: []
+  field_count: 0
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/FactoryConfigs
+- entity: FulfillmentDetails
+  fields:
+  - customer_id
+  - serial_number
+  - created_at
+  - updated_at
+  field_count: 4
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/FulfillmentDetails
+- entity: FulfillmentJobDetails
+  fields:
+  - customer_id
+  - serial_number
+  - created_at
+  - updated_at
+  field_count: 4
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/FulfillmentJobDetails
+- entity: FulfillmentLogs
+  fields:
+  - customer_id
+  - serial_number
+  - created_at
+  - updated_at
+  field_count: 4
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/FulfillmentLogs
+- entity: PasswordHistory
+  fields: []
+  field_count: 0
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/PasswordHistory
+- entity: ProductionFileUploads
+  fields: []
+  field_count: 0
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/ProductionFileUploads
+- entity: ReportLog
+  fields: []
+  field_count: 0
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/ReportLog
+- entity: SalesOrder
+  fields:
+  - sales_order_number
+  - customer_id
+  - parent_customer_id
+  - created_at
+  - updated_at
+  field_count: 5
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/SalesOrder
+- entity: SerialNumberDetail
+  fields:
+  - csvFile
+  - created_at
+  - updated_at
+  - deleted_at
+  field_count: 4
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/SerialNumberDetail
+- entity: TransformerDetail
+  fields:
+  - csvFile
+  - created_at
+  - updated_at
+  - deleted_at
+  field_count: 4
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/TransformerDetail
+- entity: TransformerFileUpload
+  fields: []
+  field_count: 0
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/TransformerFileUpload
+- entity: User
+  fields:
+  - name
+  - firstname
+  - lastname
+  - email
+  - email_verified_at
+  - password
+  - remember_token
+  - receivealerts
+  - usertype
+  - releid
+  - active
+  - deleted
+  - hasApiAccess
+  - hasUbiVuAccess
+  - createdAt
+  - updatedAt
+  field_count: 16
+  source: openapi/ubicquia-config-api-openapi-original.json#/components/schemas/User
+relationship_count: 12
+relationships:
+- from: SalesOrder
+  to: CustomerDetail
+  type: belongs_to
+  via: customer_id
+  evidence: SalesOrder.customer_id; POST /get-customer-id resolves a customer id
+- from: SalesOrder
+  to: SalesOrder
+  type: belongs_to
+  via: parent_customer_id
+  evidence: SalesOrder.parent_customer_id models a parent/child customer hierarchy
+- from: FulfillmentDetails
+  to: CustomerDetail
+  type: belongs_to
+  via: customer_id
+  evidence: FulfillmentDetails.customer_id
+- from: FulfillmentDetails
+  to: SerialNumberDetail
+  type: belongs_to
+  via: serial_number
+  evidence: FulfillmentDetails.serial_number joins the device serial record
+- from: FulfillmentJobDetails
+  to: FulfillmentDetails
+  type: belongs_to
+  via: customer_id + serial_number
+  evidence: FulfillmentJobDetails mirrors FulfillmentDetails keys for the async job
+- from: FulfillmentLogs
+  to: FulfillmentJobDetails
+  type: belongs_to
+  via: customer_id + serial_number
+  evidence: FulfillmentLogs mirrors the job keys
+- from: SerialNumberDetail
+  to: SalesOrder
+  type: belongs_to
+  via: sales_order_number
+  evidence: paginateGetSerialNumberDetailResponse rows carry sales_order_number alongside serial_number
+- from: SerialNumberDetail
+  to: IccidMaster
+  type: has_one
+  via: iccid
+  evidence: serial number rows carry iccid, dev_eui, imei, imsi, mac_address; PUT /iccid-master/update/{iccid}
+    keys on the same iccid
+- from: User
+  to: CustomerDetail
+  type: has_many
+  via: customer_user[].customer_id
+  evidence: successGetUserResponse embeds a customer_user[] join with has_ubivu / api access flags
+- from: ProductionFileUploads
+  to: SerialNumberDetail
+  type: has_many
+  via: csvFile rows
+  evidence: POST /update-production-file ingests a CSV of serial numbers
+- from: TransformerFileUpload
+  to: TransformerDetail
+  type: has_many
+  via: csvFile rows
+  evidence: POST /update-transformer-file ingests a CSV of transformer records
+- from: ApiRequestLog
+  to: User
+  type: belongs_to
+  via: userId
+  evidence: ApiRequestLog.userId
+identifier_notes:
+- Customers are keyed by an opaque string customer_id, plus a numeric parent_customer_id for hierarchy.
+- Devices are keyed by serial_number and carry the radio identity set dev_eui / imei / imsi / mac_address
+  / iccid.
+- Users are keyed by a UUID (example d73e4a66-a015-442c-8f54-f84891386b0f) and carry hasApiAccess and
+  hasUbiVuAccess booleans that gate this API and the UbiVu platform respectively.
+- Sales orders are keyed by sales_order_number.
+caveat: Only 14 component schemas are declared and six of them (Country, FactoryConfigs, PasswordHistory,
+  ProductionFileUploads, ReportLog, TransformerFileUpload) declare no properties at all. The relationship
+  graph above is therefore reconstructed from the declared properties PLUS the inline response examples,
+  which are richer than the schemas; nothing here is inferred beyond what those two sources state.

@@ -1,0 +1,14 @@
+generated: '2026-09-01'
+method: searched
+source: openapi/ubicquia-config-api-openapi-original.json; https://config.api.ubicquia.com/docs; www.ubicquia.com/llms.txt
+limit_count: 0
+limits: []
+response_headers: []
+status_on_exhaustion: null
+retry_after: false
+notes: No rate limits are published. None of the 39 operations declares a 429 response, no RateLimit-*
+  / X-RateLimit-* / Retry-After header appears in the spec, and there is no public developer portal page
+  documenting throttling - the interactive Swagger UI at config.api.ubicquia.com/api/documentation 302s
+  to a login. The spec does declare an ApiRequestLog schema (id, userId, utcTime, duration) which shows
+  per-user request accounting exists server-side, but no limit derived from it is disclosed to callers.
+  limit_count 0 is a measured absence.

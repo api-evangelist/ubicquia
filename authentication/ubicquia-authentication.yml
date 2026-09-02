@@ -1,0 +1,16 @@
+generated: '2026-09-01'
+method: derived
+source: openapi/ubicquia-config-api-openapi-original.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: Api Key
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: 'Use header x-api-key: ''key'' to send api key endpoints'
+  sources:
+  - openapi/ubicquia-config-api-openapi-original.json

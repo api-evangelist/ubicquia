@@ -1,0 +1,3240 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ubi Api",
+    "description": "Ubi Api Documenation",
+    "contact": {
+      "email": "admin@ubicquia2.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "https://config.api.ubicquia.com/api/",
+      "description": "L5 Swagger OpenApi Server"
+    }
+  ],
+  "paths": {
+    "/AuthCheck": {
+      "get": {
+        "tags": [
+          "AuthCheck"
+        ],
+        "summary": "Get all data",
+        "description": "Returns a list of data",
+        "operationId": "index",
+        "responses": {
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/fulfillment-detail": {
+      "post": {
+        "tags": [
+          "Fulfillment Details"
+        ],
+        "summary": "Add fulfillment Details",
+        "description": "",
+        "operationId": "store",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/createFulfillmentDetailssRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successGetFulfillmentDetailsStoreResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/delete-fulfillment-detail": {
+      "post": {
+        "tags": [
+          "Fulfillment Details"
+        ],
+        "summary": "Delete fulfillment Details",
+        "description": "",
+        "operationId": "destroy",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/FulfillmentDetailssRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successGetFulfillmentDetailsResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/fulfillment-detail-update": {
+      "post": {
+        "tags": [
+          "Fulfillment Details"
+        ],
+        "summary": "Upadate fulfillment Details",
+        "description": "",
+        "operationId": "fulfillment-detail-update",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/FulfillmentDetailssRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successGetFulfillmentDetailsResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/extended-fulfillment-detail": {
+      "post": {
+        "tags": [
+          "Fulfillment Details"
+        ],
+        "summary": "Extended fulfillment Details",
+        "description": "",
+        "operationId": "extended-fulfillment-detail",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/createExtendedFulfillmentDetailssRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successGetFulfillmentDetailsResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/extended-fulfillment-detail-update": {
+      "post": {
+        "tags": [
+          "Fulfillment Details"
+        ],
+        "summary": "Extended fulfillment Details Update",
+        "description": "",
+        "operationId": "extended-fulfillment-detail-update",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/createExtendedFulfillmentDetailssRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successGetFulfillmentDetailsResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/fulfillment-detail-status": {
+      "get": {
+        "tags": [
+          "Fulfillment Details"
+        ],
+        "summary": "get fulfillment detail status",
+        "description": "get fulfillment detail status",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Request id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/fulfillmentDetailsLogResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/iccid-master/update/{iccid}": {
+      "put": {
+        "tags": [
+          "ICCID Master"
+        ],
+        "summary": "Update ICCID master status",
+        "description": "Updates ICCID status. For used status, records replacement metadata and requires replaced_by_iccid to already exist in iccid_master. For available status, replacement metadata is cleared and returned as null.",
+        "operationId": "updateIccidRecord",
+        "parameters": [
+          {
+            "name": "iccid",
+            "in": "path",
+            "description": "ICCID to update (alphanumeric, no special characters)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "89011703324655860429"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/IccidMasterReplaceRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/iccidMasterUpdateResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          },
+          "422": {
+            "description": "Validation error (invalid payload, ICCID already has replacement data, or replaced_by_iccid not found)",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "failed",
+                  "code": 422,
+                  "message": "JSON Payload is not correct",
+                  "errors": [
+                    "Validation error message"
+                  ],
+                  "version": "value"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/update-iccid-master-file": {
+      "post": {
+        "tags": [
+          "ICCID Master"
+        ],
+        "summary": "Upload ICCID master CSV for bulk update",
+        "description": "Upload a CSV file to create or update ICCID master records. Processing runs asynchronously on the iccid-master-file-upload queue. Roles: configuser, factoryadmin, factoryuser.",
+        "operationId": "updateIccidMasterFile",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/IccidMasterFileRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/iccidMasterFileUploadResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          },
+          "422": {
+            "description": "Invalid file (must be CSV) or validation error"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/delete-iccid-master-file": {
+      "post": {
+        "tags": [
+          "ICCID Master"
+        ],
+        "summary": "Upload ICCID master CSV for bulk delete",
+        "description": "Upload a CSV file listing ICCIDs to delete. Records with replacement data cannot be deleted. Processing runs asynchronously. Roles: configuser, factoryadmin.",
+        "operationId": "deleteIccidMasterFile",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/IccidMasterFileRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/iccidMasterFileUploadResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          },
+          "422": {
+            "description": "Invalid file (must be CSV) or validation error"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-iccid-master-list": {
+      "get": {
+        "tags": [
+          "ICCID Master"
+        ],
+        "summary": "Get paginated ICCID master list",
+        "description": "Returns ICCID master records with optional search and sorting. Roles: configuser, factoryadmin, factoryuser.",
+        "operationId": "getIccidMasterList",
+        "parameters": [
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "id",
+              "enum": [
+                "id",
+                "customer_id",
+                "iccid",
+                "eid",
+                "date_added",
+                "activation_code",
+                "replaced_iccid_sr_num",
+                "replaced_on"
+              ]
+            }
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          },
+          {
+            "name": "search_type",
+            "in": "query",
+            "description": "Column to search",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "iccid",
+                "eid",
+                "activation_code",
+                "replaced_iccid_sr_num",
+                "replaced_on"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search string (partial match)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/getIccidMasterListResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/log/iccid-master": {
+      "get": {
+        "tags": [
+          "ICCID Master"
+        ],
+        "summary": "Get latest ICCID master file upload status",
+        "description": "Returns status of the most recent ICCID master file upload (success, failed, in progress, or no file found). Roles: configuser, factoryadmin, factoryuser.",
+        "operationId": "getIccidMasterLatestLog",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/iccidMasterLatestLogResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-latest-failed-log/{type}": {
+      "get": {
+        "tags": [
+          "ICCID Master"
+        ],
+        "summary": "Download latest failed ICCID master CSV log",
+        "description": "Returns the processed CSV content from the latest ICCID master upload with failed rows. Type must be iccid_master. Roles: configuser, factoryadmin, factoryuser.",
+        "operationId": "getIccidMasterFailedCsv",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "description": "File type (only iccid_master supported)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "iccid_master"
+              ],
+              "example": "iccid_master"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/iccidMasterFailedCsvResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          },
+          "422": {
+            "description": "Invalid type parameter"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/update-sales-order": {
+      "put": {
+        "tags": [
+          "Sales Order"
+        ],
+        "summary": "Update Sales Order by id",
+        "description": "",
+        "operationId": "update",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/SalesOrderRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/salesOrderResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/delete-sales-order": {
+      "delete": {
+        "tags": [
+          "Sales Order"
+        ],
+        "summary": "Deletes Sales order by id",
+        "operationId": "destroy",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/SalesOrderDeleteRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successOperation"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-sales-order/{sales_order_number}": {
+      "get": {
+        "tags": [
+          "Sales Order"
+        ],
+        "summary": "get sales order detail",
+        "description": "get sales order detail",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/param_sales_order_number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/salesOrderResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/add-sales-order": {
+      "post": {
+        "tags": [
+          "Sales Order"
+        ],
+        "summary": "Add Sales Order by async",
+        "description": "",
+        "operationId": "add-sales-order",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/AsyncSalesOrderRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": "Sales Order setup request placed successfully",
+                  "status": "success",
+                  "code": 200,
+                  "message": "Operation success",
+                  "version": "value"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-sales-order-status": {
+      "get": {
+        "tags": [
+          "Sales Order"
+        ],
+        "summary": "get sales order status",
+        "description": "get sales order status",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Request id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "customer_id",
+            "in": "query",
+            "description": "Customer id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/salesOrderResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/add-sales-order-config": {
+      "post": {
+        "tags": [
+          "Sales Order"
+        ],
+        "summary": "Add Sales Order on Config",
+        "description": "",
+        "operationId": "add-sales-order-config",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/SalesOrderRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/salesOrderResponseConfig"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/update-production-file": {
+      "post": {
+        "tags": [
+          "Serial Number"
+        ],
+        "summary": "Update Serial Number",
+        "description": "Allow file: CSV or JSON",
+        "operationId": "update",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/SerialNumberDetailRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successSerialNumberDetailResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/delete-production-file": {
+      "post": {
+        "tags": [
+          "Serial Number"
+        ],
+        "summary": "Delete Serial Number",
+        "description": "",
+        "operationId": "destroy",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/SerialNumberDetailRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successSerialNumberDetailResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-customer-id": {
+      "post": {
+        "tags": [
+          "Customer Detail"
+        ],
+        "summary": "Get Customer Id",
+        "description": "",
+        "operationId": "getcustid",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/getCustIdRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successSerialNumberDetailResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-serial-number-list": {
+      "get": {
+        "tags": [
+          "Serial Number"
+        ],
+        "summary": "Get all serial number details",
+        "description": "",
+        "operationId": "get-serial-number-list",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "query",
+            "description": "Customer Id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "so_number",
+            "in": "query",
+            "description": "Sales Order Number",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "search_type",
+            "in": "query",
+            "description": "select search type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "dev_eui",
+              "enum": [
+                "serial_number",
+                "imei",
+                "dev_eui",
+                "iccid",
+                "iccid_secondary",
+                "fulfillment_id",
+                "partner_id",
+                "partner_serial_num",
+                "partner_item_name"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "searching string",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "integer",
+              "default": "1"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Per page items to show in list",
+            "schema": {
+              "type": "integer",
+              "default": "20"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/paginateGetSerialNumberDetailResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/check-uploaded-production-file-status": {
+      "get": {
+        "tags": [
+          "Serial Number"
+        ],
+        "summary": "Get check uploaded production file status",
+        "description": "",
+        "operationId": "check-uploaded-production-file-status",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/checkUploadedProductionFileStatusResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-production-file-list": {
+      "get": {
+        "tags": [
+          "Serial Number"
+        ],
+        "summary": "Get all production file details",
+        "description": "Get a list of production file details with filtering options.",
+        "operationId": "get-production-file-list",
+        "parameters": [
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Sort field (e.g., 'created_at')",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "created_at"
+            }
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "description": "Sort direction ('asc' or 'desc')",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            }
+          },
+          {
+            "name": "file_type",
+            "in": "query",
+            "description": "Select file type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "prod_file",
+              "enum": [
+                "prod_file",
+                "coil_file"
+              ]
+            }
+          },
+          {
+            "name": "search_type",
+            "in": "query",
+            "description": "Select search type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "filename",
+              "enum": [
+                "filename",
+                "name",
+                "status"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Searching string",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "integer",
+              "default": "1"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Per page items to show in the list",
+            "schema": {
+              "type": "integer",
+              "default": "20"
+            }
+          },
+          {
+            "name": "start_date_time",
+            "in": "query",
+            "description": "Start Date and Time of the file (yyyy-MM-dd h:m:s)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end_date_time",
+            "in": "query",
+            "description": "End Date and Time of the file (yyyy-MM-dd h:m:s)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/paginateProductionFileDetailResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/update-transformer-file": {
+      "post": {
+        "tags": [
+          "Transformer Details"
+        ],
+        "summary": "Update transformer details",
+        "description": "Allow file: CSV",
+        "operationId": "update",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/TransformerDetailRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": "File Upload successful! Data processing is in progress. Please wait while we process your data in the background.",
+                  "status": "success",
+                  "code": 200,
+                  "message": "success",
+                  "version": "value"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/delete-transformer-file": {
+      "post": {
+        "tags": [
+          "Transformer Details"
+        ],
+        "summary": "Delete transformer details",
+        "description": "",
+        "operationId": "destroy",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/TransformerDetailRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": "File Upload successful! Data processing is in progress. Please wait while we process your data in the background.",
+                  "status": "success",
+                  "code": 200,
+                  "message": "success",
+                  "version": "value"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-transformer-file-list": {
+      "get": {
+        "tags": [
+          "Transformer Details"
+        ],
+        "summary": "Get all transformer file list",
+        "description": "",
+        "operationId": "get-transformer-file-list",
+        "parameters": [
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "created_at"
+            }
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "integer",
+              "default": "1"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Per page items to show in list",
+            "schema": {
+              "type": "integer",
+              "default": "20"
+            }
+          },
+          {
+            "name": "search_type",
+            "in": "query",
+            "description": "select search type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "filename",
+              "enum": [
+                "filename",
+                "name",
+                "status"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "searching string",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start_date_time",
+            "in": "query",
+            "description": "Start Date and Time of file (yyyy-mm-dd h:m:s)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end_date_time",
+            "in": "query",
+            "description": "End Date and Time of file (yyyy-mm-dd h:m:s)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/getTransformerFileDetailResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/check-uploaded-file-status": {
+      "get": {
+        "tags": [
+          "Transformer Details"
+        ],
+        "summary": "Get check uploaded file status",
+        "description": "",
+        "operationId": "check-uploaded-file-status",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/checkUploadedFileStatusResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-transformer-file-by-id/{id}": {
+      "get": {
+        "tags": [
+          "Transformer Details"
+        ],
+        "summary": "Get transformer file by id",
+        "description": "",
+        "operationId": "get-transformer-file-by-id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/param_id_string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/transformerFileResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-coil-file-by-id/{id}": {
+      "get": {
+        "tags": [
+          "Transformer Details"
+        ],
+        "summary": "Get transformer file by id",
+        "description": "",
+        "operationId": "get-coil-file-by-id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/param_id_string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/transformerFileResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/update-coil-file": {
+      "post": {
+        "tags": [
+          "Transformer Details"
+        ],
+        "summary": "Update coil transformer details",
+        "description": "Allow file: CSV",
+        "operationId": "update-coil",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/TransformerDetailRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": "File Upload successful! Data processing is in progress. Please wait while we process your data in the background.",
+                  "status": "success",
+                  "code": 200,
+                  "message": "success",
+                  "version": "value"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/delete-coil-file": {
+      "post": {
+        "tags": [
+          "Transformer Details"
+        ],
+        "summary": "Delete coil details",
+        "description": "",
+        "operationId": "destroy-coil",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/TransformerDetailRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": "File Upload successful! Data processing is in progress. Please wait while we process your data in the background.",
+                  "status": "success",
+                  "code": 200,
+                  "message": "success",
+                  "version": "value"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/add-user": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add User",
+        "description": "",
+        "operationId": "store",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/userAddRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successGetUserResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/update-user/{id}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update user id",
+        "description": "",
+        "operationId": "update",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/param_id_string"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/userUpdateRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successUserResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/delete-user/{id}": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Deletes User by id",
+        "operationId": "destroy",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successOperation"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/get-user/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "get User By User Id",
+        "description": "get User By User Id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/param_id_string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successUserResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/update-me": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update Me",
+        "description": "",
+        "operationId": "update me",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/updateMeRequestBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successUserResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    },
+    "/changeUserCustomerStatus/{id}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "change User Customer Status",
+        "description": "",
+        "operationId": "changeUserCustomerStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User body param",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "isActive": {
+                    "description": "user isActive",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/successUserResponse"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ResourceResponse"
+          }
+        },
+        "security": [
+          {
+            "Api Key": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiRequestLog": {
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "utcTime": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "number",
+            "format": "double"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "Country": {
+        "title": "Country Model",
+        "description": "Country Model",
+        "type": "object"
+      },
+      "FactoryConfigs": {
+        "type": "object"
+      },
+      "FulfillmentDetails": {
+        "properties": {
+          "customer_id": {
+            "type": "string"
+          },
+          "serial_number": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "FulfillmentJobDetails": {
+        "properties": {
+          "customer_id": {
+            "type": "string"
+          },
+          "serial_number": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "FulfillmentLogs": {
+        "properties": {
+          "customer_id": {
+            "type": "string"
+          },
+          "serial_number": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "PasswordHistory": {
+        "type": "object"
+      },
+      "ProductionFileUploads": {
+        "type": "object"
+      },
+      "ReportLog": {
+        "type": "object"
+      },
+      "SalesOrder": {
+        "properties": {
+          "sales_order_number": {
+            "type": "string"
+          },
+          "customer_id": {
+            "type": "string"
+          },
+          "parent_customer_id": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "SerialNumberDetail": {
+        "properties": {
+          "csvFile": {
+            "type": "file"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "TransformerDetail": {
+        "properties": {
+          "csvFile": {
+            "type": "file"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "TransformerFileUpload": {
+        "type": "object"
+      },
+      "User": {
+        "title": "User",
+        "description": "User",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "email_verified_at": {
+            "type": "timestamp"
+          },
+          "password": {
+            "type": "string"
+          },
+          "remember_token": {
+            "type": "string"
+          },
+          "receivealerts": {
+            "type": "boolean"
+          },
+          "usertype": {
+            "type": "string"
+          },
+          "releid": {
+            "type": "integer"
+          },
+          "active": {
+            "type": "string"
+          },
+          "deleted": {
+            "type": "string"
+          },
+          "hasApiAccess": {
+            "type": "boolean"
+          },
+          "hasUbiVuAccess": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "responses": {
+      "successGetFulfillmentDetailsResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/FulfillmentDetails"
+              }
+            }
+          }
+        }
+      },
+      "successGetFulfillmentDetailsStoreResponse": {
+        "description": "Successful response for getting fulfillment details",
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "request_id": {
+                  "description": "Request Id of job",
+                  "type": "string"
+                },
+                "data": {
+                  "description": "The actual data in the response",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "Status of the response (success, error, etc.)",
+                  "type": "string"
+                },
+                "message": {
+                  "description": "A message providing additional information about the response",
+                  "type": "string"
+                },
+                "code": {
+                  "description": "Numeric code representing the status of the response",
+                  "type": "integer"
+                },
+                "version": {
+                  "description": "API version",
+                  "type": "string"
+                }
+              },
+              "type": "object",
+              "example": {
+                "request_id": "65",
+                "data": "",
+                "status": "success",
+                "message": "Fulfillment processing is in progress. Please wait while we process your data in the background.",
+                "code": 200,
+                "version": "2"
+              }
+            }
+          }
+        }
+      },
+      "fulfillmentDetailsLogResponse": {
+        "description": "RESPONSE_SUCCESFULL",
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "data": {
+                  "properties": {
+                    "job": {
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": "180"
+                        },
+                        "user_id": {
+                          "type": "string",
+                          "example": "d73e4a66-a015-442c-8f54-f84891386b0f"
+                        },
+                        "action": {
+                          "type": "string",
+                          "example": "Add"
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "Completed"
+                        },
+                        "ubihub_status": {
+                          "type": "string",
+                          "example": null,
+                          "nullable": true
+                        },
+                        "ubicell_status": {
+                          "type": "string",
+                          "example": "In Progress",
+                          "nullable": true
+                        },
+                        "ubigrid_status": {
+                          "type": "string",
+                          "example": null,
+                          "nullable": true
+                        },
+                        "email_alert_status": {
+                          "type": "string",
+                          "example": "In Progress",
+                          "nullable": true
+                        },
+                        "date": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-12-14 17:59:47"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-12-14 17:59:47"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-12-14 18:06:03"
+                        },
+                        "deleted_at": {
+                          "type": "string",
+                          "example": null,
+                          "nullable": true
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "job_details": {
+                      "properties": {
+                        "success": {
+                          "type": "array",
+                          "items": {
+                            "properties": {
+                              "serial_number": {
+                                "type": "string",
+                                "example": "New_test-6/21/24-10001"
+                              },
+                              "reason": {
+                                "type": "string",
+                                "example": "Successfully Inserted."
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "failed": {
+                          "type": "array",
+                          "items": {
+                            "properties": {
+                              "serial_number": {
+                                "type": "string",
+                                "example": "New_test-6/21/24-10000"
+                              },
+                              "reason": {
+                                "type": "string",
+                                "example": "Duplicate record found"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Fulfillment Details"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "version": {
+                  "type": "string",
+                  "example": "2"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "iccidMasterUpdateResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": {
+                "iccid": "89011703324655860429",
+                "status": "available",
+                "replaced_by_iccid": null,
+                "replaced_iccid_sr_num": null,
+                "replaced_on": null,
+                "replaced_by": null,
+                "updated_at": "2026-05-19T14:30:00.000000Z"
+              },
+              "status": "success",
+              "code": "200",
+              "message": "ICCID master updated successfully.",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "iccidMasterFileUploadResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": "",
+              "status": "success",
+              "code": "200",
+              "message": "File Upload successful! Data processing is in progress. Please wait while we process your data in the background.",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "getIccidMasterListResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": [
+                {
+                  "id": 1,
+                  "iccid": "89011703324655860429",
+                  "eid": "string",
+                  "date_added": "2026-05-19 14:30:00",
+                  "activation_code": "ABC123",
+                  "replaced_iccid_sr_num": "SR-001",
+                  "replaced_on": "2026-05-20 10:00:00"
+                }
+              ],
+              "links": {
+                "first": "http://hostname/api/get-iccid-master-list?page=1",
+                "last": "http://hostname/api/get-iccid-master-list?page=1",
+                "prev": null,
+                "next": null
+              },
+              "meta": {
+                "current_page": 1,
+                "from": 1,
+                "last_page": 1,
+                "path": "http://hostname/api/get-iccid-master-list",
+                "per_page": 50,
+                "to": 1,
+                "total": 1
+              },
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "iccidMasterLatestLogResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": {
+                "original_file_name": "iccid_master.csv",
+                "file_date_uploaded_at": "2026-05-19 14:30:00",
+                "latest_information": "Success",
+                "error_count": 0,
+                "success_count": 100,
+                "is_completed": true
+              },
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "iccidMasterFailedCsvResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": "iccid,status,reason\\r\\n89011703324655860429,Fail,Invalid row\\r\\n"
+          }
+        }
+      },
+      "successSalesOrderResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SalesOrder"
+              }
+            }
+          }
+        }
+      },
+      "salesOrderResponseConfig": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": {
+                "sales_order_number": "string",
+                "customer_id": "string",
+                "parent_customer_id": "number",
+                "is_international_cust": "boolean",
+                "invoice_to_parent": "boolean",
+                "updated_at": "yyyy-mm-dd hh:mm:ss",
+                "created_at": "yyyy-mm-dd hh:mm:ss",
+                "id": "number",
+                "country": "string"
+              },
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "salesOrderResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": {
+                "sales_order": {
+                  "sales_order_number": "string",
+                  "customer_id": "string",
+                  "updated_at": "yyyy-mm-dd hh:mm:ss",
+                  "created_at": "yyyy-mm-dd hh:mm:ss",
+                  "id": "number"
+                },
+                "customer": {
+                  "id": "number",
+                  "customer_id": "string",
+                  "customer_name": "string",
+                  "ubivu_address": "string",
+                  "api_address": "string",
+                  "mqtt_address": "string",
+                  "graph_address": "string",
+                  "parent_customer_id": "number",
+                  "is_external": "boolean",
+                  "invoice_to_parent": "boolean",
+                  "created_at": "yyyy-mm-dd hh:mm:ss",
+                  "updated_at": "yyyy-mm-dd hh:mm:ss",
+                  "deleted_at": "yyyy-mm-dd hh:mm:ss",
+                  "customer_users": "number"
+                },
+                "parent_customer": {
+                  "parent_customer_id": "number",
+                  "parent_customer_name": "string",
+                  "updated_at": "yyyy-mm-dd hh:mm:ss",
+                  "created_at": "yyyy-mm-dd hh:mm:ss",
+                  "id": "number"
+                },
+                "users_on_sales_order": [
+                  {
+                    "id": "string",
+                    "name": "string",
+                    "firstname": "string",
+                    "lastname": "string",
+                    "email": "string",
+                    "email_verified_at": "timestamp",
+                    "license_accepted_id": "integer",
+                    "terms_accepted_id": "integer",
+                    "current_customer_id": "integer",
+                    "last_loggedin": "integer",
+                    "createdAt": "yyyy-mm-dd hh:mm:ss",
+                    "updatedAt": "yyyy-mm-dd hh:mm:ss",
+                    "deactivatedAt": "yyyy-mm-dd hh:mm:ss",
+                    "isActive": "boolean"
+                  }
+                ]
+              },
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "successSerialNumberDetailResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SerialNumberDetail"
+              }
+            }
+          }
+        }
+      },
+      "paginateGetSerialNumberDetailResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": [
+                {
+                  "customer_id": "string",
+                  "sales_order_number": "string",
+                  "serial_number": "string",
+                  "dev_eui": "string",
+                  "iccid": "string",
+                  "sku_part_number": "string",
+                  "imei": "string",
+                  "mac_address": "string",
+                  "imsi": "string",
+                  "box_id": "string",
+                  "carton_id": "string",
+                  "firmware_version": "string",
+                  "uid": "string",
+                  "app_key": "string",
+                  "fulfilled_at": "yyyy-mm-dd hh:mm:ss",
+                  "production_at": "yyyy-mm-dd hh:mm:ss",
+                  "updated_at": "yyyy-mm-dd hh:mm:ss",
+                  "deleted_at": "yyyy-mm-dd hh:mm:ss",
+                  "triac_test": "string",
+                  "pwm_test": "string",
+                  "stpm_test": "string",
+                  "th_on_test": "string",
+                  "th_off_test": "string"
+                }
+              ],
+              "links": {
+                "first": "http://hostname/api/get-serial-number-list?page=1",
+                "last": "http://hostname/api/get-serial-number-list?page=1",
+                "prev": "number | null",
+                "next": "number | null"
+              },
+              "meta": {
+                "current_page": 1,
+                "from": 1,
+                "last_page": 1,
+                "path": "http://hostname/api/get-serial-number-list",
+                "per_page": 20,
+                "to": 2,
+                "total": 2
+              },
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "checkUploadedProductionFileStatusResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": [
+                {
+                  "count": "integer"
+                }
+              ],
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "paginateProductionFileDetailResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": [
+                {
+                  "id": "integer",
+                  "user_id": "string",
+                  "action": "string",
+                  "filename": "string",
+                  "uploaded_filename": "string",
+                  "created_at": "yyyy-mm-dd hh:mm:ss",
+                  "updated_at": "yyyy-mm-dd hh:mm:ss",
+                  "deleted_at": "yyyy-mm-dd hh:mm:ss",
+                  "path": "string",
+                  "user_name": "string"
+                }
+              ],
+              "links": {
+                "first": "http://hostname/api/get-production-file-list?page=1",
+                "last": "http://hostname/api/get-production-file-list?page=1",
+                "prev": "number | null",
+                "next": "number | null"
+              },
+              "meta": {
+                "current_page": 1,
+                "from": 1,
+                "last_page": 1,
+                "path": "http://hostname/api/get-production-file-list",
+                "per_page": 20,
+                "to": 2,
+                "total": 2
+              },
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "successOperation": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": [
+                []
+              ],
+              "status": "success",
+              "message": "Operation success",
+              "code": 200,
+              "version": "0.0.0"
+            }
+          }
+        }
+      },
+      "404ResourceResponse": {
+        "description": "Item not found",
+        "content": {
+          "application/json": {
+            "example": {
+              "status": "failed",
+              "code": 404,
+              "message": "Operation failed"
+            }
+          }
+        }
+      },
+      "getTransformerFileDetailResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": [
+                {
+                  "id": "integer",
+                  "user_id": "string",
+                  "action": "string",
+                  "filename": "string",
+                  "uploaded_filename": "string",
+                  "created_at": "yyyy-mm-dd hh:mm:ss",
+                  "updated_at": "yyyy-mm-dd hh:mm:ss",
+                  "deleted_at": "yyyy-mm-dd hh:mm:ss",
+                  "path": "string",
+                  "user_name": "string"
+                }
+              ],
+              "links": {
+                "first": "http://hostname/api/get-transformer-file-list?page=1",
+                "last": "http://hostname/api/get-transformer-file-list?page=1",
+                "prev": "number | null",
+                "next": "number | null"
+              },
+              "meta": {
+                "current_page": 1,
+                "from": 1,
+                "last_page": 1,
+                "path": "http://hostname/api/get-transformer-file-list",
+                "per_page": 20,
+                "to": 2,
+                "total": 2
+              },
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "checkUploadedFileStatusResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": [
+                {
+                  "count": "integer"
+                }
+              ],
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "transformerFileResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": [
+                {
+                  "url": "string",
+                  "fileExtension": "string"
+                }
+              ],
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      },
+      "successUserResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      },
+      "successGetUserResponse": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "example": {
+              "data": [
+                {
+                  "user_id": {
+                    "name": "string",
+                    "firstname": "string",
+                    "lastname": "string",
+                    "email": "string",
+                    "id": "string",
+                    "isActive": "boolean"
+                  },
+                  "profile": {
+                    "phone": "string",
+                    "user_id": "string",
+                    "id": "string",
+                    "profilePicture": "string"
+                  },
+                  "customer_user": [
+                    {
+                      "user_id": "string",
+                      "customer_id": "number",
+                      "has_ubivu_access": "boolean",
+                      "role_id": "number",
+                      "receive_alerts": "boolean",
+                      "has_api_access": "boolean",
+                      "updated_at": "yyyy-mm-dd hh:mm:ss",
+                      "created_at": "yyyy-mm-dd hh:mm:ss",
+                      "id": "number",
+                      "api_key": {
+                        "customer_user_id": "number",
+                        "apiKey": "number",
+                        "expires": "yyyy-mm-dd hh:mm:ss",
+                        "canRead": "boolean",
+                        "canCreate": "boolean",
+                        "canUpdate": "boolean",
+                        "canDelete": "boolean",
+                        "id": "string",
+                        "updated_at": "yyyy-mm-dd hh:mm:ss",
+                        "created_at": "yyyy-mm-dd hh:mm:ss"
+                      },
+                      "action": "created"
+                    }
+                  ]
+                }
+              ],
+              "status": "success",
+              "code": "200",
+              "message": "Operation success",
+              "version": "value"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "param_id": {
+        "name": "id",
+        "in": "path",
+        "description": "item id",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "param_isActive": {
+        "name": "isActive",
+        "in": "query",
+        "description": "item isActive",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "param_id_string": {
+        "name": "id",
+        "in": "path",
+        "description": "item id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "param_sales_order_number": {
+        "name": "sales_order_number",
+        "in": "path",
+        "description": "Sales Order Number",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "requestBodies": {
+      "FulfillmentDetailssRequestBody": {
+        "description": "FulfillmentDetails body param",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "sales_order_number": {
+                  "description": "Sales Order Number",
+                  "type": "string"
+                },
+                "customer_id": {
+                  "description": "Customer ID",
+                  "type": "string"
+                },
+                "serial_num": {
+                  "description": "string array",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "FulfillmentDetailssRequestUpdateBody": {
+        "description": "FulfillmentDetails body param",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "customer_id": {
+                  "description": "Customer ID",
+                  "type": "string"
+                },
+                "serial_num": {
+                  "description": "Serial Number",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "createFulfillmentDetailssRequestBody": {
+        "description": "FulfillmentDetails body param",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "sales_order_number": {
+                  "description": "Sales Order Number",
+                  "type": "string"
+                },
+                "customer_id": {
+                  "description": "Customer ID",
+                  "type": "string"
+                },
+                "serial_num": {
+                  "description": "string array",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "fulfillment_id": {
+                  "description": "Fulfillment ID",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "createExtendedFulfillmentDetailssRequestBody": {
+        "description": "FulfillmentDetails body param",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "sales_order_number": {
+                  "description": "Sales Order Number",
+                  "type": "string"
+                },
+                "customer_id": {
+                  "description": "Customer ID",
+                  "type": "string"
+                },
+                "items": {
+                  "description": "string array",
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "serial_num": {
+                        "type": "string"
+                      },
+                      "partner_serial_num": {
+                        "type": "string"
+                      },
+                      "partner_item_name": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "fulfillment_id": {
+                  "description": "Fulfillment ID",
+                  "type": "string"
+                },
+                "partner_id": {
+                  "description": "Partner ID",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "IccidMasterFileRequestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "properties": {
+                "csvFile": {
+                  "description": "CSV file for ICCID master bulk update or delete",
+                  "type": "file"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "IccidMasterReplaceRequestBody": {
+        "description": "ICCID master status update body",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status"
+              ],
+              "properties": {
+                "status": {
+                  "description": "ICCID status. Replacement fields are required for used and must be null for available.",
+                  "type": "string",
+                  "enum": [
+                    "used",
+                    "available"
+                  ],
+                  "example": "available"
+                },
+                "replaced_by_iccid": {
+                  "description": "ICCID that replaced this SIM (must exist in iccid_master when status is used)",
+                  "type": "string",
+                  "example": null,
+                  "nullable": true
+                },
+                "replaced_iccid_sr_num": {
+                  "description": "Serial number associated with the replaced ICCID when status is used",
+                  "type": "string",
+                  "example": null,
+                  "nullable": true
+                },
+                "replaced_on": {
+                  "description": "When the ICCID was replaced (ISO-8601, required when status is used)",
+                  "type": "string",
+                  "format": "date-time",
+                  "example": null,
+                  "nullable": true
+                },
+                "replaced_by": {
+                  "description": "Service or user that performed the replacement when status is used",
+                  "type": "string",
+                  "example": null,
+                  "nullable": true
+                },
+                "updated_at": {
+                  "description": "Optional client timestamp for audit (overrides server updated_at when provided)",
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2026-05-19T14:30:00Z"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "SalesOrderRequestBody": {
+        "description": "Sales Order body param",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "sales_order_number": {
+                  "description": "Sales Order Number",
+                  "type": "string"
+                },
+                "customer_id": {
+                  "description": "Customer ID",
+                  "type": "number"
+                },
+                "customer_name": {
+                  "description": "Customer Name",
+                  "type": "string"
+                },
+                "parent_customer_id": {
+                  "description": "Parent Customer Id",
+                  "type": "string"
+                },
+                "parent_customer_name": {
+                  "description": "Parent Customer Name",
+                  "type": "string"
+                },
+                "is_international_cust": {
+                  "description": "Is international customer",
+                  "type": "boolean"
+                },
+                "invoice_to_parent": {
+                  "description": "Invoice to parent",
+                  "type": "boolean"
+                },
+                "country": {
+                  "description": "country iso",
+                  "type": "string"
+                },
+                "users": {
+                  "description": "Users Details",
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "email": {
+                        "type": "string"
+                      },
+                      "firstname": {
+                        "type": "string"
+                      },
+                      "lastname": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "AsyncSalesOrderRequestBody": {
+        "description": "Sales Order body param",
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "sales_order_number": {
+                  "description": "Sales Order Number",
+                  "type": "string"
+                },
+                "customer_id": {
+                  "description": "Customer ID",
+                  "type": "number"
+                },
+                "customer_name": {
+                  "description": "Customer Name",
+                  "type": "string"
+                },
+                "parent_customer_id": {
+                  "description": "Parent Customer Id",
+                  "type": "string"
+                },
+                "parent_customer_name": {
+                  "description": "Parent Customer Name",
+                  "type": "string"
+                },
+                "is_international_cust": {
+                  "description": "Is international customer",
+                  "type": "boolean"
+                },
+                "invoice_to_parent": {
+                  "description": "Invoice to parent",
+                  "type": "boolean"
+                },
+                "tenant_step": {
+                  "description": "tenant creation setps",
+                  "type": "string"
+                },
+                "country": {
+                  "description": "country iso",
+                  "type": "string"
+                },
+                "skus": {
+                  "description": "skus",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "users": {
+                  "description": "Users Details",
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "email": {
+                        "type": "string"
+                      },
+                      "firstname": {
+                        "type": "string"
+                      },
+                      "lastname": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "SalesOrderDeleteRequestBody": {
+        "description": "Sales Order body param",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "sales_order_number": {
+                  "description": "Sales Order Number",
+                  "type": "string"
+                },
+                "customer_id": {
+                  "description": "Customer ID",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "SerialNumberDetailRequestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "properties": {
+                "csvFile": {
+                  "type": "file"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "getCustIdRequestBody": {
+        "description": "Get Customer id from dev_eui",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "dev_eui": {
+                  "description": "Get Customer Id",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "TransformerDetailRequestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "properties": {
+                "csvFile": {
+                  "type": "file"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "userAddRequestBody": {
+        "description": "User body param",
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "firstname": {
+                  "description": "First Name",
+                  "type": "string"
+                },
+                "lastname": {
+                  "description": "Last Name",
+                  "type": "string"
+                },
+                "email": {
+                  "description": "Email",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "Phone",
+                  "type": "string"
+                },
+                "role_id": {
+                  "description": "Role Id",
+                  "type": "integer"
+                },
+                "has_ubivu_access": {
+                  "description": "has_ubivu_access",
+                  "type": "boolean"
+                },
+                "has_api_access": {
+                  "description": "has_api_access",
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "userUpdateRequestBody": {
+        "description": "User body param",
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "id": {
+                  "description": "User Id",
+                  "type": "string"
+                },
+                "firstname": {
+                  "description": "First Name",
+                  "type": "string"
+                },
+                "lastname": {
+                  "description": "Last Name",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "Phone",
+                  "type": "string"
+                },
+                "role_id": {
+                  "description": "Role Id",
+                  "type": "integer"
+                },
+                "has_ubivu_access": {
+                  "description": "has_ubivu_access",
+                  "type": "boolean"
+                },
+                "has_api_access": {
+                  "description": "has_api_access",
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "updateMeRequestBody": {
+        "description": "User body param",
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "id": {
+                  "description": "User Id",
+                  "type": "string"
+                },
+                "firstname": {
+                  "description": "First Name",
+                  "type": "string"
+                },
+                "lastname": {
+                  "description": "Last Name",
+                  "type": "string"
+                },
+                "email": {
+                  "description": "Email",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "Phone",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Api Key": {
+        "type": "apiKey",
+        "description": "Use header x-api-key: 'key' to send api key endpoints",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AuthCheck",
+      "description": "Operations about Auth Check"
+    },
+    {
+      "name": "Sales Order",
+      "description": "Operations about Sales Order"
+    },
+    {
+      "name": "Fulfillment Details",
+      "description": "Operation about fulfillment details"
+    },
+    {
+      "name": "Serial Number",
+      "description": "Import serial Number details"
+    },
+    {
+      "name": "User",
+      "description": "User"
+    },
+    {
+      "name": "Customer Detail",
+      "description": "Get Customer Detail"
+    },
+    {
+      "name": "Transformer Details",
+      "description": "Operation about transformer file upload"
+    },
+    {
+      "name": "ICCID Master",
+      "description": "Operations about ICCID master"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+generated: '2026-09-01'
+method: generated
+source: openapi/ubicquia-config-api-openapi-original.json
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Ubicquia Config API
+  version: 1.0.0
+extends: openapi/ubicquia-config-api-openapi-original.json
+x-apievangelist:
+  generated: '2026-09-01'
+  method: generated
+  source: openapi/ubicquia-config-api-openapi-original.json
+  note: >-
+    Captures API Evangelist's enrichment of the harvested Ubicquia "Ubi Api" OpenAPI without mutating
+    it. Every action below records something observed in the spec or on a probed Ubicquia URL; nothing
+    asserts a capability the provider does not publish.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: ubicquia
+      x-apievangelist-source-url: https://config.api.ubicquia.com/docs
+      x-apievangelist-harvested: '2026-09-01'
+      x-ownership-basis: >-
+        servers[] is https://config.api.ubicquia.com/api/, the provider's own host; info.title is
+        "Ubi Api" matching the company's Ubi* product naming (UbiCell, UbiHub, UbiVu, UbiGrid); the
+        tag set (Sales Order, Serial Number, Transformer Details, ICCID Master) is Ubicquia's own
+        device manufacturing and provisioning domain; and the x-api-key header matches the
+        Access-Control-Allow-Headers advertised by api.ubicquia.com.
+      x-agent-readiness-notes:
+        idempotency: not supported - no Idempotency-Key anywhere in the surface
+        reversibility: absent - seven destructive deletes, no restore operation, no stated window
+        rate_limits: undocumented - no 429 declared, no RateLimit-* headers
+        errors: vendor envelope, not RFC 9457; no machine-stable error codes
+  - target: $.servers
+    update:
+      x-apievangelist-note: >-
+        The interactive Swagger UI at /api/documentation 302s to the login SPA; only the raw OpenAPI
+        document at /docs is served anonymously.
+  - target: $.components.securitySchemes['Api Key']
+    update:
+      x-apievangelist-note: >-
+        Applied to all 39 operations. GET /AuthCheck is the key-verification probe. There is no OAuth,
+        no scopes and no token refresh; see authentication/ubicquia-authentication.yml.
+  - target: $.paths['/delete-iccid-master-file'].post
+    update:
+      x-apievangelist-consequence: destructive-bulk
+      x-apievangelist-reversibility: >-
+        No reversal operation and no retention window is published for this CSV-driven bulk delete
+        across the ICCID inventory. Treat as final.
+  - target: $.paths['/delete-sales-order'].delete
+    update:
+      x-apievangelist-consequence: destructive
+      x-apievangelist-reversibility: No published restore operation or window.
+  - target: $.paths['/delete-user/{id}'].delete
+    update:
+      x-apievangelist-consequence: destructive
+      x-apievangelist-reversibility: No published restore operation or window.

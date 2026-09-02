@@ -1,0 +1,31 @@
+generated: '2026-09-01'
+method: derived
+source: openapi/ubicquia-config-api-openapi-original.json; www.ubicquia.com sitemap.xml (105 URLs) and
+  llms.txt index
+versioning:
+  scheme: none
+  current: 0.0.1
+  in_path: false
+  docs: null
+  note: info.version is 0.0.1 and the server base is https://config.api.ubicquia.com/api/ with no version
+    segment. No versioning policy is published.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: 'No deprecation policy page exists on www.ubicquia.com (sitemap and llms.txt both checked), and
+    no operation in the spec carries deprecated: true. No Deprecation pointer is wired.'
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+status_page_probe:
+- url: https://status.ubicquia.com/
+  status: null
+  result: DNS NXDOMAIN
+changelog:
+  url: null
+  note: Ubicquia publishes a Blog and a Newsroom but no dated API or product changelog. No ChangeLog artifact
+    was written and no ChangeLog pointer is wired.
+deprecated_operations: []
+notes: 'No StatusPage or Deprecation pointer is wired in apis.yml: status.ubicquia.com does not resolve
+  and no deprecation policy is published. Recorded as an honest absence.'

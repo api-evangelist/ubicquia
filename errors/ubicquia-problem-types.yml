@@ -1,0 +1,66 @@
+generated: '2026-09-01'
+method: derived
+source: openapi/ubicquia-config-api-openapi-original.json
+format: vendor-envelope
+rfc9457: false
+envelope:
+  media_type: application/json
+  fields:
+  - status
+  - code
+  - message
+  - data
+  - version
+  example:
+    status: failed
+    code: 404
+    message: Operation failed
+  note: Errors are returned as a flat vendor JSON envelope, not RFC 9457 application/problem+json. status
+    is the string "failed" on error and "success" on the happy path; code repeats the HTTP status; message
+    is human prose with no machine-stable error identifier. There is no error-code registry, no type URI,
+    and no field-level errors[] array, so an agent cannot branch on anything narrower than the HTTP status.
+problems:
+- status: 400
+  title: Bad Request
+  operations_returning_it: 39
+  remediation: Validate the request body/query against the operation schema before retrying; the API returns
+    no field-level detail on a 400.
+  source_operations:
+  - openapi/ubicquia-config-api-openapi-original.json#index
+  - openapi/ubicquia-config-api-openapi-original.json#store
+  - openapi/ubicquia-config-api-openapi-original.json#destroy
+  - openapi/ubicquia-config-api-openapi-original.json#fulfillment-detail-update
+- status: 401
+  title: Unauthenticated
+  operations_returning_it: 39
+  remediation: Send a valid x-api-key request header. A missing or wrong key returns the same 401 "Unauthenticated"
+    envelope.
+  source_operations:
+  - openapi/ubicquia-config-api-openapi-original.json#index
+  - openapi/ubicquia-config-api-openapi-original.json#store
+  - openapi/ubicquia-config-api-openapi-original.json#destroy
+  - openapi/ubicquia-config-api-openapi-original.json#fulfillment-detail-update
+- status: 404
+  title: Item not found
+  operations_returning_it: 39
+  remediation: The addressed record does not exist (or the route is wrong). Re-read the id from the corresponding
+    list operation.
+  source_operations:
+  - openapi/ubicquia-config-api-openapi-original.json#index
+  - openapi/ubicquia-config-api-openapi-original.json#store
+  - openapi/ubicquia-config-api-openapi-original.json#destroy
+  - openapi/ubicquia-config-api-openapi-original.json#fulfillment-detail-update
+- status: 422
+  title: Invalid file (must be CSV) or validation error
+  operations_returning_it: 4
+  remediation: Validation failed on the ICCID master payload or uploaded CSV; correct the named rows and
+    re-upload.
+  source_operations:
+  - openapi/ubicquia-config-api-openapi-original.json#updateIccidRecord
+  - openapi/ubicquia-config-api-openapi-original.json#updateIccidMasterFile
+  - openapi/ubicquia-config-api-openapi-original.json#deleteIccidMasterFile
+  - openapi/ubicquia-config-api-openapi-original.json#getIccidMasterFailedCsv
+gaps:
+- No 429 response is declared on any operation.
+- No 5xx response is declared on any operation.
+- No machine-readable error code distinct from the HTTP status.

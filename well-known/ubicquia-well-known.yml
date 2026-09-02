@@ -1,0 +1,89 @@
+generated: '2026-09-01'
+method: probed
+source: live GET of the named /.well-known/ path list on every Ubicquia host in apis.yml + OpenAPI servers[]
+hosts:
+- host: https://www.ubicquia.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: ubicquia-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control:
+    path: /.well-known/ubicquia-negative-control-7f3ab91c.json
+    status: 404
+    result: passed
+- host: https://config.api.ubicquia.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control:
+    path: /.well-known/ubicquia-negative-control-7f3ab91c.json
+    status: 404
+    result: passed
+  note: Host is a Laravel SPA that answers 200 with a 968-byte HTML shell for unknown GET routes, but
+    returns a real 404 for every /.well-known/ path probed, including the negative control.
+- host: https://api.ubicquia.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control:
+    path: /.well-known/ubicquia-negative-control-7f3ab91c.json
+    status: 404
+    result: passed
+- host: https://portal.ubicquia.com
+  documents:
+  - path: /.well-known/security.txt
+    status: null
+    note: 'TLS handshake failed: certificate subject name does not match portal.ubicquia.com'
+  note: Host resolves but presents a TLS certificate that does not cover portal.ubicquia.com; every probe
+    failed at the handshake, and an insecure fetch of /user/login/ returned 404. Recorded as unreachable,
+    not as absent.
+hit_count: 1
+notes: 'One real document served: RFC 9116 security.txt on the marketing host, naming security@ubicquia.com
+  and an Expires of 2027-05-06. No OAuth/OIDC discovery, no api-catalog, no AI-plugin, no A2A agent card
+  anywhere.'
