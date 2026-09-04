@@ -12,6 +12,20 @@ description: 'Ubicquia is a Fort Lauderdale, Florida intelligent-infrastructure 
   publicly serves an OpenAPI 3.0 description of its device configuration, provisioning and sales-order
   API at config.api.ubicquia.com, and raised a $106M Series D in 2026.'
 url: https://raw.githubusercontent.com/api-evangelist/ubicquia/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  - rate-limits
+  - security
+  generated: '2026-09-03'
+  method: derived
 image: https://cdn.sanity.io/images/1851a3wt/production/6092260ef60a7711ec4ef0ae4785609ee5608d86-3072x1726.webp?w=1200&h=630&fit=crop&auto=format
 x-type: company
 x-source: harvest:secondary-market
