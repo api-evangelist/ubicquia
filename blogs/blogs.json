@@ -1,0 +1,18 @@
+{
+  "repo": "ubicquia",
+  "feeds": [
+    {
+      "source": "https://www.ubicquia.com/",
+      "feed_url": "https://www.ubicquia.com/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://www.ubicquia.com/blog',",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-09-06T19:17:18Z"
+}
