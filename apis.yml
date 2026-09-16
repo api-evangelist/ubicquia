@@ -46,33 +46,94 @@ tags:
 - Edge AI
 - Transformer Monitoring
 apis:
-- aid: ubicquia:ubicquia-config-api
-  name: Ubicquia Config API
-  description: 'The publicly described Ubicquia configuration and provisioning API ("Ubi Api",
-    OpenAPI 3.0.0, 39 operations) covering sales orders, fulfillment details, device serial numbers
-    and production files, distribution transformer and coil files, ICCID (cellular SIM) master
-    records, customer lookup and user administration. Authenticated with an x-api-key header; the
-    interactive Swagger UI at the same host redirects to a login, while the raw OpenAPI document is
-    served publicly at /docs.'
+- aid: ubicquia:ubicquia-authcheck-api
+  name: Ubicquia Auth Check API
+  description: Operations about Auth Check
   humanURL: https://config.api.ubicquia.com/
   baseURL: https://config.api.ubicquia.com/api/
   tags:
-  - Configuration
-  - Provisioning
-  - Devices
-  - Transformers
-  - Sales Orders
+  - AuthCheck
   properties:
   - type: OpenAPI
-    url: openapi/ubicquia-config-api-openapi-original.json
-  - type: Overlay
-    url: overlays/ubicquia-config-api-overlay.yaml
+    url: openapi/ubicquia-authcheck-api-openapi.yml
+- aid: ubicquia:ubicquia-customer-detail-api
+  name: Ubicquia Customer Detail API
+  description: Get Customer Detail
+  humanURL: https://config.api.ubicquia.com/
+  baseURL: https://config.api.ubicquia.com/api/
+  tags:
+  - Customer Detail
+  properties:
+  - type: OpenAPI
+    url: openapi/ubicquia-customer-detail-api-openapi.yml
+- aid: ubicquia:ubicquia-fulfillment-details-api
+  name: Ubicquia Fulfillment Details API
+  description: Operation about fulfillment details
+  humanURL: https://config.api.ubicquia.com/
+  baseURL: https://config.api.ubicquia.com/api/
+  tags:
+  - Fulfillment Details
+  properties:
+  - type: OpenAPI
+    url: openapi/ubicquia-fulfillment-details-api-openapi.yml
+- aid: ubicquia:ubicquia-iccid-master-api
+  name: Ubicquia ICCID Master API
+  description: Operations about ICCID master
+  humanURL: https://config.api.ubicquia.com/
+  baseURL: https://config.api.ubicquia.com/api/
+  tags:
+  - ICCID Master
+  properties:
+  - type: OpenAPI
+    url: openapi/ubicquia-iccid-master-api-openapi.yml
+- aid: ubicquia:ubicquia-sales-order-api
+  name: Ubicquia Sales Order API
+  description: Operations about Sales Order
+  humanURL: https://config.api.ubicquia.com/
+  baseURL: https://config.api.ubicquia.com/api/
+  tags:
+  - Sales Order
+  properties:
+  - type: OpenAPI
+    url: openapi/ubicquia-sales-order-api-openapi.yml
+- aid: ubicquia:ubicquia-serial-number-api
+  name: Ubicquia Serial Number API
+  description: Import serial Number details
+  humanURL: https://config.api.ubicquia.com/
+  baseURL: https://config.api.ubicquia.com/api/
+  tags:
+  - Serial Number
+  properties:
+  - type: OpenAPI
+    url: openapi/ubicquia-serial-number-api-openapi.yml
+- aid: ubicquia:ubicquia-transformer-details-api
+  name: Ubicquia Transformer Details API
+  description: Operation about transformer file upload
+  humanURL: https://config.api.ubicquia.com/
+  baseURL: https://config.api.ubicquia.com/api/
+  tags:
+  - Transformer Details
+  properties:
+  - type: OpenAPI
+    url: openapi/ubicquia-transformer-details-api-openapi.yml
+- aid: ubicquia:ubicquia-user-api
+  name: Ubicquia User API
+  description: User
+  humanURL: https://config.api.ubicquia.com/
+  baseURL: https://config.api.ubicquia.com/api/
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/ubicquia-user-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/ubicquia-config-api-overlay.yaml
 - type: Website
   url: https://www.ubicquia.com/
 - type: Blog
