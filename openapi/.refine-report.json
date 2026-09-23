@@ -1,0 +1,34 @@
+{
+  "provider": "ubicquia",
+  "sources": [
+    "_original/ubicquia-config-api-openapi-original.json"
+  ],
+  "outputs": [
+    "ubicquia-authcheck-api-openapi.yml",
+    "ubicquia-customer-detail-api-openapi.yml",
+    "ubicquia-fulfillment-details-api-openapi.yml",
+    "ubicquia-iccid-master-api-openapi.yml",
+    "ubicquia-sales-order-api-openapi.yml",
+    "ubicquia-serial-number-api-openapi.yml",
+    "ubicquia-transformer-details-api-openapi.yml",
+    "ubicquia-user-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ubicquia-config-api-openapi-original.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0; renamed 1 component key(s) illegal in 3.x (e.g. Api Key)",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "ubicquia-authcheck-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ubicquia-customer-detail-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ubicquia-fulfillment-details-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ubicquia-iccid-master-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ubicquia-sales-order-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ubicquia-serial-number-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ubicquia-transformer-details-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ubicquia-user-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

@@ -1,0 +1,88 @@
+openapi: 3.2.0
+info:
+  title: Ubi Customer Detail API
+  description: Ubi Api Documenation
+  contact:
+    email: admin@ubicquia2.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+servers:
+- url: https://config.api.ubicquia.com/api/
+  description: L5 Swagger OpenApi Server
+tags:
+- name: Customer Detail
+  description: Get Customer Detail
+paths:
+  /get-customer-id:
+    post:
+      tags:
+      - Customer Detail
+      summary: Get Customer Id
+      description: ''
+      operationId: getcustid
+      requestBody:
+        $ref: '#/components/requestBodies/getCustIdRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/successSerialNumberDetailResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+components:
+  responses:
+    successSerialNumberDetailResponse:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SerialNumberDetail'
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+  schemas:
+    SerialNumberDetail:
+      properties:
+        csvFile:
+          type: file
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+      type: object
+  requestBodies:
+    getCustIdRequestBody:
+      description: Get Customer id from dev_eui
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              dev_eui:
+                description: Get Customer Id
+                type: string
+            type: object
+  securitySchemes:
+    Api_Key:
+      type: apiKey
+      description: 'Use header x-api-key: ''key'' to send api key endpoints'
+      name: x-api-key
+      in: header

@@ -1,0 +1,368 @@
+openapi: 3.2.0
+info:
+  title: Ubi ICCID Master API
+  description: Ubi Api Documenation
+  contact:
+    email: admin@ubicquia2.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+servers:
+- url: https://config.api.ubicquia.com/api/
+  description: L5 Swagger OpenApi Server
+tags:
+- name: ICCID Master
+  description: Operations about ICCID master
+paths:
+  /iccid-master/update/{iccid}:
+    put:
+      tags:
+      - ICCID Master
+      summary: Update ICCID master status
+      description: Updates ICCID status. For used status, records replacement metadata and requires replaced_by_iccid to already exist in iccid_master. For available status, replacement metadata is cleared and returned as null.
+      operationId: updateIccidRecord
+      parameters:
+      - name: iccid
+        in: path
+        description: ICCID to update (alphanumeric, no special characters)
+        required: true
+        schema:
+          type: string
+          example: '89011703324655860429'
+      requestBody:
+        $ref: '#/components/requestBodies/IccidMasterReplaceRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/iccidMasterUpdateResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+        '422':
+          description: Validation error (invalid payload, ICCID already has replacement data, or replaced_by_iccid not found)
+          content:
+            application/json:
+              example:
+                status: failed
+                code: 422
+                message: JSON Payload is not correct
+                errors:
+                - Validation error message
+                version: value
+      security:
+      - Api Key: []
+  /update-iccid-master-file:
+    post:
+      tags:
+      - ICCID Master
+      summary: Upload ICCID master CSV for bulk update
+      description: 'Upload a CSV file to create or update ICCID master records. Processing runs asynchronously on the iccid-master-file-upload queue. Roles: configuser, factoryadmin, factoryuser.'
+      operationId: updateIccidMasterFile
+      requestBody:
+        $ref: '#/components/requestBodies/IccidMasterFileRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/iccidMasterFileUploadResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+        '422':
+          description: Invalid file (must be CSV) or validation error
+      security:
+      - Api Key: []
+  /delete-iccid-master-file:
+    post:
+      tags:
+      - ICCID Master
+      summary: Upload ICCID master CSV for bulk delete
+      description: 'Upload a CSV file listing ICCIDs to delete. Records with replacement data cannot be deleted. Processing runs asynchronously. Roles: configuser, factoryadmin.'
+      operationId: deleteIccidMasterFile
+      requestBody:
+        $ref: '#/components/requestBodies/IccidMasterFileRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/iccidMasterFileUploadResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+        '422':
+          description: Invalid file (must be CSV) or validation error
+      security:
+      - Api Key: []
+  /get-iccid-master-list:
+    get:
+      tags:
+      - ICCID Master
+      summary: Get paginated ICCID master list
+      description: 'Returns ICCID master records with optional search and sorting. Roles: configuser, factoryadmin, factoryuser.'
+      operationId: getIccidMasterList
+      parameters:
+      - name: per_page
+        in: query
+        description: Items per page
+        schema:
+          type: integer
+          default: 50
+      - name: page
+        in: query
+        description: Page number
+        schema:
+          type: integer
+          default: 1
+      - name: sort_by
+        in: query
+        schema:
+          type: string
+          default: id
+          enum:
+          - id
+          - customer_id
+          - iccid
+          - eid
+          - date_added
+          - activation_code
+          - replaced_iccid_sr_num
+          - replaced_on
+      - name: sort_dir
+        in: query
+        schema:
+          type: string
+          default: desc
+          enum:
+          - asc
+          - desc
+      - name: search_type
+        in: query
+        description: Column to search
+        schema:
+          type: string
+          enum:
+          - iccid
+          - eid
+          - activation_code
+          - replaced_iccid_sr_num
+          - replaced_on
+      - name: q
+        in: query
+        description: Search string (partial match)
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getIccidMasterListResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /log/iccid-master:
+    get:
+      tags:
+      - ICCID Master
+      summary: Get latest ICCID master file upload status
+      description: 'Returns status of the most recent ICCID master file upload (success, failed, in progress, or no file found). Roles: configuser, factoryadmin, factoryuser.'
+      operationId: getIccidMasterLatestLog
+      responses:
+        '200':
+          $ref: '#/components/responses/iccidMasterLatestLogResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /get-latest-failed-log/{type}:
+    get:
+      tags:
+      - ICCID Master
+      summary: Download latest failed ICCID master CSV log
+      description: 'Returns the processed CSV content from the latest ICCID master upload with failed rows. Type must be iccid_master. Roles: configuser, factoryadmin, factoryuser.'
+      operationId: getIccidMasterFailedCsv
+      parameters:
+      - name: type
+        in: path
+        description: File type (only iccid_master supported)
+        required: true
+        schema:
+          type: string
+          enum:
+          - iccid_master
+          example: iccid_master
+      responses:
+        '200':
+          $ref: '#/components/responses/iccidMasterFailedCsvResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+        '422':
+          description: Invalid type parameter
+      security:
+      - Api Key: []
+components:
+  responses:
+    getIccidMasterListResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - id: 1
+              iccid: '89011703324655860429'
+              eid: string
+              date_added: '2026-05-19 14:30:00'
+              activation_code: ABC123
+              replaced_iccid_sr_num: SR-001
+              replaced_on: '2026-05-20 10:00:00'
+            links:
+              first: http://hostname/api/get-iccid-master-list?page=1
+              last: http://hostname/api/get-iccid-master-list?page=1
+              prev: null
+              next: null
+            meta:
+              current_page: 1
+              from: 1
+              last_page: 1
+              path: http://hostname/api/get-iccid-master-list
+              per_page: 50
+              to: 1
+              total: 1
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+    iccidMasterFileUploadResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data: ''
+            status: success
+            code: '200'
+            message: File Upload successful! Data processing is in progress. Please wait while we process your data in the background.
+            version: value
+    iccidMasterUpdateResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+              iccid: '89011703324655860429'
+              status: available
+              replaced_by_iccid: null
+              replaced_iccid_sr_num: null
+              replaced_on: null
+              replaced_by: null
+              updated_at: '2026-05-19T14:30:00.000000Z'
+            status: success
+            code: '200'
+            message: ICCID master updated successfully.
+            version: value
+    iccidMasterFailedCsvResponse:
+      description: successful operation
+      content:
+        application/json:
+          example: iccid,status,reason\r\n89011703324655860429,Fail,Invalid row\r\n
+    iccidMasterLatestLogResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+              original_file_name: iccid_master.csv
+              file_date_uploaded_at: '2026-05-19 14:30:00'
+              latest_information: Success
+              error_count: 0
+              success_count: 100
+              is_completed: true
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
+  requestBodies:
+    IccidMasterReplaceRequestBody:
+      description: ICCID master status update body
+      required: true
+      content:
+        application/json:
+          schema:
+            required:
+            - status
+            properties:
+              status:
+                description: ICCID status. Replacement fields are required for used and must be null for available.
+                type: string
+                enum:
+                - used
+                - available
+                example: available
+              replaced_by_iccid:
+                description: ICCID that replaced this SIM (must exist in iccid_master when status is used)
+                type:
+                - string
+                - 'null'
+                example: null
+              replaced_iccid_sr_num:
+                description: Serial number associated with the replaced ICCID when status is used
+                type:
+                - string
+                - 'null'
+                example: null
+              replaced_on:
+                description: When the ICCID was replaced (ISO-8601, required when status is used)
+                type:
+                - string
+                - 'null'
+                format: date-time
+                example: null
+              replaced_by:
+                description: Service or user that performed the replacement when status is used
+                type:
+                - string
+                - 'null'
+                example: null
+              updated_at:
+                description: Optional client timestamp for audit (overrides server updated_at when provided)
+                type: string
+                format: date-time
+                example: '2026-05-19T14:30:00Z'
+            type: object
+    IccidMasterFileRequestBody:
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              csvFile:
+                description: CSV file for ICCID master bulk update or delete
+                type: file
+            type: object
+  securitySchemes:
+    Api_Key:
+      type: apiKey
+      description: 'Use header x-api-key: ''key'' to send api key endpoints'
+      name: x-api-key
+      in: header

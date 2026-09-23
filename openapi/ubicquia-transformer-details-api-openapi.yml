@@ -1,0 +1,343 @@
+openapi: 3.2.0
+info:
+  title: Ubi Transformer Details API
+  description: Ubi Api Documenation
+  contact:
+    email: admin@ubicquia2.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+servers:
+- url: https://config.api.ubicquia.com/api/
+  description: L5 Swagger OpenApi Server
+tags:
+- name: Transformer Details
+  description: Operation about transformer file upload
+paths:
+  /update-transformer-file:
+    post:
+      tags:
+      - Transformer Details
+      summary: Update transformer details
+      description: 'Allow file: CSV'
+      operationId: update
+      requestBody:
+        $ref: '#/components/requestBodies/TransformerDetailRequestBody'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              example:
+                data: File Upload successful! Data processing is in progress. Please wait while we process your data in the background.
+                status: success
+                code: 200
+                message: success
+                version: value
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /delete-transformer-file:
+    post:
+      tags:
+      - Transformer Details
+      summary: Delete transformer details
+      description: ''
+      operationId: destroy
+      requestBody:
+        $ref: '#/components/requestBodies/TransformerDetailRequestBody'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              example:
+                data: File Upload successful! Data processing is in progress. Please wait while we process your data in the background.
+                status: success
+                code: 200
+                message: success
+                version: value
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /get-transformer-file-list:
+    get:
+      tags:
+      - Transformer Details
+      summary: Get all transformer file list
+      description: ''
+      operationId: get-transformer-file-list
+      parameters:
+      - name: sort_by
+        in: query
+        schema:
+          type: string
+          default: created_at
+      - name: sort_dir
+        in: query
+        schema:
+          type: string
+          default: desc
+      - name: page
+        in: query
+        description: Page number
+        schema:
+          type: integer
+          default: '1'
+      - name: per_page
+        in: query
+        description: Per page items to show in list
+        schema:
+          type: integer
+          default: '20'
+      - name: search_type
+        in: query
+        description: select search type
+        required: false
+        schema:
+          type: string
+          default: filename
+          enum:
+          - filename
+          - name
+          - status
+      - name: q
+        in: query
+        description: searching string
+        schema:
+          type: string
+      - name: start_date_time
+        in: query
+        description: Start Date and Time of file (yyyy-mm-dd h:m:s)
+        schema:
+          type: string
+      - name: end_date_time
+        in: query
+        description: End Date and Time of file (yyyy-mm-dd h:m:s)
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getTransformerFileDetailResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /check-uploaded-file-status:
+    get:
+      tags:
+      - Transformer Details
+      summary: Get check uploaded file status
+      description: ''
+      operationId: check-uploaded-file-status
+      responses:
+        '200':
+          $ref: '#/components/responses/checkUploadedFileStatusResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /get-transformer-file-by-id/{id}:
+    get:
+      tags:
+      - Transformer Details
+      summary: Get transformer file by id
+      description: ''
+      operationId: get-transformer-file-by-id
+      parameters:
+      - $ref: '#/components/parameters/param_id_string'
+      responses:
+        '200':
+          $ref: '#/components/responses/transformerFileResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /get-coil-file-by-id/{id}:
+    get:
+      tags:
+      - Transformer Details
+      summary: Get transformer file by id
+      description: ''
+      operationId: get-coil-file-by-id
+      parameters:
+      - $ref: '#/components/parameters/param_id_string'
+      responses:
+        '200':
+          $ref: '#/components/responses/transformerFileResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /update-coil-file:
+    post:
+      tags:
+      - Transformer Details
+      summary: Update coil transformer details
+      description: 'Allow file: CSV'
+      operationId: update-coil
+      requestBody:
+        $ref: '#/components/requestBodies/TransformerDetailRequestBody'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              example:
+                data: File Upload successful! Data processing is in progress. Please wait while we process your data in the background.
+                status: success
+                code: 200
+                message: success
+                version: value
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /delete-coil-file:
+    post:
+      tags:
+      - Transformer Details
+      summary: Delete coil details
+      description: ''
+      operationId: destroy-coil
+      requestBody:
+        $ref: '#/components/requestBodies/TransformerDetailRequestBody'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              example:
+                data: File Upload successful! Data processing is in progress. Please wait while we process your data in the background.
+                status: success
+                code: 200
+                message: success
+                version: value
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+components:
+  responses:
+    transformerFileResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - url: string
+              fileExtension: string
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
+    checkUploadedFileStatusResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - count: integer
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
+    getTransformerFileDetailResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - id: integer
+              user_id: string
+              action: string
+              filename: string
+              uploaded_filename: string
+              created_at: yyyy-mm-dd hh:mm:ss
+              updated_at: yyyy-mm-dd hh:mm:ss
+              deleted_at: yyyy-mm-dd hh:mm:ss
+              path: string
+              user_name: string
+            links:
+              first: http://hostname/api/get-transformer-file-list?page=1
+              last: http://hostname/api/get-transformer-file-list?page=1
+              prev: number | null
+              next: number | null
+            meta:
+              current_page: 1
+              from: 1
+              last_page: 1
+              path: http://hostname/api/get-transformer-file-list
+              per_page: 20
+              to: 2
+              total: 2
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+  parameters:
+    param_id_string:
+      name: id
+      in: path
+      description: item id
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    TransformerDetailRequestBody:
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              csvFile:
+                type: file
+            type: object
+  securitySchemes:
+    Api_Key:
+      type: apiKey
+      description: 'Use header x-api-key: ''key'' to send api key endpoints'
+      name: x-api-key
+      in: header

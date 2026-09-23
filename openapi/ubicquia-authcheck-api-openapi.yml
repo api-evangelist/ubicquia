@@ -1,0 +1,49 @@
+openapi: 3.2.0
+info:
+  title: Ubi Auth Check API
+  description: Ubi Api Documenation
+  contact:
+    email: admin@ubicquia2.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+servers:
+- url: https://config.api.ubicquia.com/api/
+  description: L5 Swagger OpenApi Server
+tags:
+- name: AuthCheck
+  description: Operations about Auth Check
+paths:
+  /AuthCheck:
+    get:
+      tags:
+      - AuthCheck
+      summary: Get all data
+      description: Returns a list of data
+      operationId: index
+      responses:
+        '401':
+          description: Unauthenticated
+        '400':
+          description: Bad Request
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+components:
+  responses:
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+  securitySchemes:
+    Api_Key:
+      type: apiKey
+      description: 'Use header x-api-key: ''key'' to send api key endpoints'
+      name: x-api-key
+      in: header

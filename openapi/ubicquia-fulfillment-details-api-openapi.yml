@@ -1,0 +1,385 @@
+openapi: 3.2.0
+info:
+  title: Ubi Fulfillment Details API
+  description: Ubi Api Documenation
+  contact:
+    email: admin@ubicquia2.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+servers:
+- url: https://config.api.ubicquia.com/api/
+  description: L5 Swagger OpenApi Server
+tags:
+- name: Fulfillment Details
+  description: Operation about fulfillment details
+paths:
+  /fulfillment-detail:
+    post:
+      tags:
+      - Fulfillment Details
+      summary: Add fulfillment Details
+      description: ''
+      operationId: store
+      requestBody:
+        $ref: '#/components/requestBodies/createFulfillmentDetailssRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/successGetFulfillmentDetailsStoreResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /delete-fulfillment-detail:
+    post:
+      tags:
+      - Fulfillment Details
+      summary: Delete fulfillment Details
+      description: ''
+      operationId: destroy
+      requestBody:
+        $ref: '#/components/requestBodies/FulfillmentDetailssRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/successGetFulfillmentDetailsResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /fulfillment-detail-update:
+    post:
+      tags:
+      - Fulfillment Details
+      summary: Upadate fulfillment Details
+      description: ''
+      operationId: fulfillment-detail-update
+      requestBody:
+        $ref: '#/components/requestBodies/FulfillmentDetailssRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/successGetFulfillmentDetailsResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /extended-fulfillment-detail:
+    post:
+      tags:
+      - Fulfillment Details
+      summary: Extended fulfillment Details
+      description: ''
+      operationId: extended-fulfillment-detail
+      requestBody:
+        $ref: '#/components/requestBodies/createExtendedFulfillmentDetailssRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/successGetFulfillmentDetailsResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /extended-fulfillment-detail-update:
+    post:
+      tags:
+      - Fulfillment Details
+      summary: Extended fulfillment Details Update
+      description: ''
+      operationId: extended-fulfillment-detail-update
+      requestBody:
+        $ref: '#/components/requestBodies/createExtendedFulfillmentDetailssRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/successGetFulfillmentDetailsResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+  /fulfillment-detail-status:
+    get:
+      tags:
+      - Fulfillment Details
+      summary: get fulfillment detail status
+      parameters:
+      - name: id
+        in: query
+        description: Request id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/fulfillmentDetailsLogResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthenticated
+        '404':
+          $ref: '#/components/responses/404ResourceResponse'
+      security:
+      - Api Key: []
+      operationId: getFulfillmentDetailStatus
+      x-operation-id-source: derived
+components:
+  requestBodies:
+    createExtendedFulfillmentDetailssRequestBody:
+      description: FulfillmentDetails body param
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              sales_order_number:
+                description: Sales Order Number
+                type: string
+              customer_id:
+                description: Customer ID
+                type: string
+              items:
+                description: string array
+                type: array
+                items:
+                  properties:
+                    serial_num:
+                      type: string
+                    partner_serial_num:
+                      type: string
+                    partner_item_name:
+                      type: string
+                  type: object
+              fulfillment_id:
+                description: Fulfillment ID
+                type: string
+              partner_id:
+                description: Partner ID
+                type: string
+            type: object
+    createFulfillmentDetailssRequestBody:
+      description: FulfillmentDetails body param
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              sales_order_number:
+                description: Sales Order Number
+                type: string
+              customer_id:
+                description: Customer ID
+                type: string
+              serial_num:
+                description: string array
+                type: array
+                items:
+                  type: string
+              fulfillment_id:
+                description: Fulfillment ID
+                type: string
+            type: object
+    FulfillmentDetailssRequestBody:
+      description: FulfillmentDetails body param
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              sales_order_number:
+                description: Sales Order Number
+                type: string
+              customer_id:
+                description: Customer ID
+                type: string
+              serial_num:
+                description: string array
+                type: array
+                items:
+                  type: string
+            type: object
+  responses:
+    successGetFulfillmentDetailsResponse:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/FulfillmentDetails'
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+    fulfillmentDetailsLogResponse:
+      description: RESPONSE_SUCCESFULL
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                properties:
+                  job:
+                    properties:
+                      id:
+                        type: integer
+                        example: '180'
+                      user_id:
+                        type: string
+                        example: d73e4a66-a015-442c-8f54-f84891386b0f
+                      action:
+                        type: string
+                        example: Add
+                      status:
+                        type: string
+                        example: Completed
+                      ubihub_status:
+                        type:
+                        - string
+                        - 'null'
+                        example: null
+                      ubicell_status:
+                        type:
+                        - string
+                        - 'null'
+                        example: In Progress
+                      ubigrid_status:
+                        type:
+                        - string
+                        - 'null'
+                        example: null
+                      email_alert_status:
+                        type:
+                        - string
+                        - 'null'
+                        example: In Progress
+                      date:
+                        type: string
+                        format: date-time
+                        example: '2023-12-14 17:59:47'
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: '2023-12-14 17:59:47'
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: '2023-12-14 18:06:03'
+                      deleted_at:
+                        type:
+                        - string
+                        - 'null'
+                        example: null
+                    type: object
+                  job_details:
+                    properties:
+                      success:
+                        type: array
+                        items:
+                          properties:
+                            serial_number:
+                              type: string
+                              example: New_test-6/21/24-10001
+                            reason:
+                              type: string
+                              example: Successfully Inserted.
+                          type: object
+                      failed:
+                        type: array
+                        items:
+                          properties:
+                            serial_number:
+                              type: string
+                              example: New_test-6/21/24-10000
+                            reason:
+                              type: string
+                              example: Duplicate record found
+                          type: object
+                    type: object
+                type: object
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: Fulfillment Details
+              code:
+                type: integer
+                example: 200
+              version:
+                type: string
+                example: '2'
+            type: object
+    successGetFulfillmentDetailsStoreResponse:
+      description: Successful response for getting fulfillment details
+      content:
+        application/json:
+          schema:
+            properties:
+              request_id:
+                description: Request Id of job
+                type: string
+              data:
+                description: The actual data in the response
+                type: string
+              status:
+                description: Status of the response (success, error, etc.)
+                type: string
+              message:
+                description: A message providing additional information about the response
+                type: string
+              code:
+                description: Numeric code representing the status of the response
+                type: integer
+              version:
+                description: API version
+                type: string
+            type: object
+            example:
+              request_id: '65'
+              data: ''
+              status: success
+              message: Fulfillment processing is in progress. Please wait while we process your data in the background.
+              code: 200
+              version: '2'
+  schemas:
+    FulfillmentDetails:
+      properties:
+        customer_id:
+          type: string
+        serial_number:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      type: object
+  securitySchemes:
+    Api_Key:
+      type: apiKey
+      description: 'Use header x-api-key: ''key'' to send api key endpoints'
+      name: x-api-key
+      in: header
