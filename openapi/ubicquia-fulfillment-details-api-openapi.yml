@@ -141,97 +141,7 @@ paths:
       operationId: getFulfillmentDetailStatus
       x-operation-id-source: derived
 components:
-  requestBodies:
-    createExtendedFulfillmentDetailssRequestBody:
-      description: FulfillmentDetails body param
-      required: true
-      content:
-        application/json:
-          schema:
-            properties:
-              sales_order_number:
-                description: Sales Order Number
-                type: string
-              customer_id:
-                description: Customer ID
-                type: string
-              items:
-                description: string array
-                type: array
-                items:
-                  properties:
-                    serial_num:
-                      type: string
-                    partner_serial_num:
-                      type: string
-                    partner_item_name:
-                      type: string
-                  type: object
-              fulfillment_id:
-                description: Fulfillment ID
-                type: string
-              partner_id:
-                description: Partner ID
-                type: string
-            type: object
-    createFulfillmentDetailssRequestBody:
-      description: FulfillmentDetails body param
-      required: true
-      content:
-        application/json:
-          schema:
-            properties:
-              sales_order_number:
-                description: Sales Order Number
-                type: string
-              customer_id:
-                description: Customer ID
-                type: string
-              serial_num:
-                description: string array
-                type: array
-                items:
-                  type: string
-              fulfillment_id:
-                description: Fulfillment ID
-                type: string
-            type: object
-    FulfillmentDetailssRequestBody:
-      description: FulfillmentDetails body param
-      required: true
-      content:
-        application/json:
-          schema:
-            properties:
-              sales_order_number:
-                description: Sales Order Number
-                type: string
-              customer_id:
-                description: Customer ID
-                type: string
-              serial_num:
-                description: string array
-                type: array
-                items:
-                  type: string
-            type: object
   responses:
-    successGetFulfillmentDetailsResponse:
-      description: successful operation
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/FulfillmentDetails'
-    404ResourceResponse:
-      description: Item not found
-      content:
-        application/json:
-          example:
-            status: failed
-            code: 404
-            message: Operation failed
     fulfillmentDetailsLogResponse:
       description: RESPONSE_SUCCESFULL
       content:
@@ -331,6 +241,14 @@ components:
                 type: string
                 example: '2'
             type: object
+    successGetFulfillmentDetailsResponse:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/FulfillmentDetails'
     successGetFulfillmentDetailsStoreResponse:
       description: Successful response for getting fulfillment details
       content:
@@ -363,6 +281,88 @@ components:
               message: Fulfillment processing is in progress. Please wait while we process your data in the background.
               code: 200
               version: '2'
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+  requestBodies:
+    createExtendedFulfillmentDetailssRequestBody:
+      description: FulfillmentDetails body param
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              sales_order_number:
+                description: Sales Order Number
+                type: string
+              customer_id:
+                description: Customer ID
+                type: string
+              items:
+                description: string array
+                type: array
+                items:
+                  properties:
+                    serial_num:
+                      type: string
+                    partner_serial_num:
+                      type: string
+                    partner_item_name:
+                      type: string
+                  type: object
+              fulfillment_id:
+                description: Fulfillment ID
+                type: string
+              partner_id:
+                description: Partner ID
+                type: string
+            type: object
+    createFulfillmentDetailssRequestBody:
+      description: FulfillmentDetails body param
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              sales_order_number:
+                description: Sales Order Number
+                type: string
+              customer_id:
+                description: Customer ID
+                type: string
+              serial_num:
+                description: string array
+                type: array
+                items:
+                  type: string
+              fulfillment_id:
+                description: Fulfillment ID
+                type: string
+            type: object
+    FulfillmentDetailssRequestBody:
+      description: FulfillmentDetails body param
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              sales_order_number:
+                description: Sales Order Number
+                type: string
+              customer_id:
+                description: Customer ID
+                type: string
+              serial_num:
+                description: string array
+                type: array
+                items:
+                  type: string
+            type: object
   schemas:
     FulfillmentDetails:
       properties:

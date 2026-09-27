@@ -163,6 +163,36 @@ components:
       schema:
         type: string
   responses:
+    salesOrderResponseConfig:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+              sales_order_number: string
+              customer_id: string
+              parent_customer_id: number
+              is_international_cust: boolean
+              invoice_to_parent: boolean
+              updated_at: yyyy-mm-dd hh:mm:ss
+              created_at: yyyy-mm-dd hh:mm:ss
+              id: number
+              country: string
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
+    successOperation:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - []
+            status: success
+            message: Operation success
+            code: 200
+            version: 0.0.0
     salesOrderResponse:
       description: successful operation
       content:
@@ -223,81 +253,7 @@ components:
             status: failed
             code: 404
             message: Operation failed
-    salesOrderResponseConfig:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-              sales_order_number: string
-              customer_id: string
-              parent_customer_id: number
-              is_international_cust: boolean
-              invoice_to_parent: boolean
-              updated_at: yyyy-mm-dd hh:mm:ss
-              created_at: yyyy-mm-dd hh:mm:ss
-              id: number
-              country: string
-            status: success
-            code: '200'
-            message: Operation success
-            version: value
-    successOperation:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-            - []
-            status: success
-            message: Operation success
-            code: 200
-            version: 0.0.0
   requestBodies:
-    SalesOrderRequestBody:
-      description: Sales Order body param
-      required: true
-      content:
-        application/json:
-          schema:
-            properties:
-              sales_order_number:
-                description: Sales Order Number
-                type: string
-              customer_id:
-                description: Customer ID
-                type: number
-              customer_name:
-                description: Customer Name
-                type: string
-              parent_customer_id:
-                description: Parent Customer Id
-                type: string
-              parent_customer_name:
-                description: Parent Customer Name
-                type: string
-              is_international_cust:
-                description: Is international customer
-                type: boolean
-              invoice_to_parent:
-                description: Invoice to parent
-                type: boolean
-              country:
-                description: country iso
-                type: string
-              users:
-                description: Users Details
-                type: array
-                items:
-                  properties:
-                    email:
-                      type: string
-                    firstname:
-                      type: string
-                    lastname:
-                      type: string
-                  type: object
-            type: object
     SalesOrderDeleteRequestBody:
       description: Sales Order body param
       required: true
@@ -350,6 +306,50 @@ components:
                 type: array
                 items:
                   type: string
+              users:
+                description: Users Details
+                type: array
+                items:
+                  properties:
+                    email:
+                      type: string
+                    firstname:
+                      type: string
+                    lastname:
+                      type: string
+                  type: object
+            type: object
+    SalesOrderRequestBody:
+      description: Sales Order body param
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              sales_order_number:
+                description: Sales Order Number
+                type: string
+              customer_id:
+                description: Customer ID
+                type: number
+              customer_name:
+                description: Customer Name
+                type: string
+              parent_customer_id:
+                description: Parent Customer Id
+                type: string
+              parent_customer_name:
+                description: Parent Customer Name
+                type: string
+              is_international_cust:
+                description: Is international customer
+                type: boolean
+              invoice_to_parent:
+                description: Invoice to parent
+                type: boolean
+              country:
+                description: country iso
+                type: string
               users:
                 description: Users Details
                 type: array

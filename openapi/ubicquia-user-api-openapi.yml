@@ -107,7 +107,7 @@ paths:
       - User
       summary: Update Me
       description: ''
-      operationId: update me
+      operationId: updateMe
       requestBody:
         $ref: '#/components/requestBodies/updateMeRequestBody'
       responses:
@@ -121,6 +121,8 @@ paths:
           $ref: '#/components/responses/404ResourceResponse'
       security:
       - Api Key: []
+      x-operation-id-source: normalized
+      x-operation-id-original: update me
   /changeUserCustomerStatus/{id}:
     put:
       tags:
@@ -236,6 +238,25 @@ components:
                 type: boolean
             type: object
   responses:
+    successUserResponse:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+    successOperation:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - []
+            status: success
+            message: Operation success
+            code: 200
+            version: 0.0.0
     404ResourceResponse:
       description: Item not found
       content:
@@ -288,33 +309,6 @@ components:
             code: '200'
             message: Operation success
             version: value
-    successOperation:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-            - []
-            status: success
-            message: Operation success
-            code: 200
-            version: 0.0.0
-    successUserResponse:
-      description: successful operation
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/User'
-  parameters:
-    param_id_string:
-      name: id
-      in: path
-      description: item id
-      required: true
-      schema:
-        type: string
   schemas:
     User:
       title: User
@@ -355,6 +349,14 @@ components:
           type: string
           format: date-time
       type: object
+  parameters:
+    param_id_string:
+      name: id
+      in: path
+      description: item id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     Api_Key:
       type: apiKey

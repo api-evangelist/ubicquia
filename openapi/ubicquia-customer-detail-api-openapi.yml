@@ -37,14 +37,6 @@ paths:
       - Api Key: []
 components:
   responses:
-    successSerialNumberDetailResponse:
-      description: successful operation
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/SerialNumberDetail'
     404ResourceResponse:
       description: Item not found
       content:
@@ -53,6 +45,14 @@ components:
             status: failed
             code: 404
             message: Operation failed
+    successSerialNumberDetailResponse:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SerialNumberDetail'
   schemas:
     SerialNumberDetail:
       properties:

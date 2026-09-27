@@ -223,14 +223,6 @@ paths:
       - Api Key: []
 components:
   responses:
-    404ResourceResponse:
-      description: Item not found
-      content:
-        application/json:
-          example:
-            status: failed
-            code: 404
-            message: Operation failed
     successSerialNumberDetailResponse:
       description: successful operation
       content:
@@ -239,39 +231,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/SerialNumberDetail'
-    paginateProductionFileDetailResponse:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-            - id: integer
-              user_id: string
-              action: string
-              filename: string
-              uploaded_filename: string
-              created_at: yyyy-mm-dd hh:mm:ss
-              updated_at: yyyy-mm-dd hh:mm:ss
-              deleted_at: yyyy-mm-dd hh:mm:ss
-              path: string
-              user_name: string
-            links:
-              first: http://hostname/api/get-production-file-list?page=1
-              last: http://hostname/api/get-production-file-list?page=1
-              prev: number | null
-              next: number | null
-            meta:
-              current_page: 1
-              from: 1
-              last_page: 1
-              path: http://hostname/api/get-production-file-list
-              per_page: 20
-              to: 2
-              total: 2
-            status: success
-            code: '200'
-            message: Operation success
-            version: value
     checkUploadedProductionFileStatusResponse:
       description: successful operation
       content:
@@ -329,15 +288,47 @@ components:
             code: '200'
             message: Operation success
             version: value
-  requestBodies:
-    SerialNumberDetailRequestBody:
+    404ResourceResponse:
+      description: Item not found
       content:
-        multipart/form-data:
-          schema:
-            properties:
-              csvFile:
-                type: file
-            type: object
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+    paginateProductionFileDetailResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - id: integer
+              user_id: string
+              action: string
+              filename: string
+              uploaded_filename: string
+              created_at: yyyy-mm-dd hh:mm:ss
+              updated_at: yyyy-mm-dd hh:mm:ss
+              deleted_at: yyyy-mm-dd hh:mm:ss
+              path: string
+              user_name: string
+            links:
+              first: http://hostname/api/get-production-file-list?page=1
+              last: http://hostname/api/get-production-file-list?page=1
+              prev: number | null
+              next: number | null
+            meta:
+              current_page: 1
+              from: 1
+              last_page: 1
+              path: http://hostname/api/get-production-file-list
+              per_page: 20
+              to: 2
+              total: 2
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
   schemas:
     SerialNumberDetail:
       properties:
@@ -353,6 +344,15 @@ components:
           type: string
           format: date-time
       type: object
+  requestBodies:
+    SerialNumberDetailRequestBody:
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              csvFile:
+                type: file
+            type: object
   securitySchemes:
     Api_Key:
       type: apiKey
