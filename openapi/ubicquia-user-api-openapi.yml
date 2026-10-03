@@ -158,85 +158,6 @@ paths:
       security:
       - Api Key: []
 components:
-  requestBodies:
-    userUpdateRequestBody:
-      description: User body param
-      content:
-        application/json:
-          schema:
-            properties:
-              id:
-                description: User Id
-                type: string
-              firstname:
-                description: First Name
-                type: string
-              lastname:
-                description: Last Name
-                type: string
-              phone:
-                description: Phone
-                type: string
-              role_id:
-                description: Role Id
-                type: integer
-              has_ubivu_access:
-                description: has_ubivu_access
-                type: boolean
-              has_api_access:
-                description: has_api_access
-                type: boolean
-            type: object
-    updateMeRequestBody:
-      description: User body param
-      content:
-        application/json:
-          schema:
-            properties:
-              id:
-                description: User Id
-                type: string
-              firstname:
-                description: First Name
-                type: string
-              lastname:
-                description: Last Name
-                type: string
-              email:
-                description: Email
-                type: string
-              phone:
-                description: Phone
-                type: string
-            type: object
-    userAddRequestBody:
-      description: User body param
-      content:
-        application/json:
-          schema:
-            properties:
-              firstname:
-                description: First Name
-                type: string
-              lastname:
-                description: Last Name
-                type: string
-              email:
-                description: Email
-                type: string
-              phone:
-                description: Phone
-                type: string
-              role_id:
-                description: Role Id
-                type: integer
-              has_ubivu_access:
-                description: has_ubivu_access
-                type: boolean
-              has_api_access:
-                description: has_api_access
-                type: boolean
-            type: object
   responses:
     successUserResponse:
       description: successful operation
@@ -257,14 +178,6 @@ components:
             message: Operation success
             code: 200
             version: 0.0.0
-    404ResourceResponse:
-      description: Item not found
-      content:
-        application/json:
-          example:
-            status: failed
-            code: 404
-            message: Operation failed
     successGetUserResponse:
       description: successful operation
       content:
@@ -309,6 +222,101 @@ components:
             code: '200'
             message: Operation success
             version: value
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+  parameters:
+    param_id_string:
+      name: id
+      in: path
+      description: item id
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    updateMeRequestBody:
+      description: User body param
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                description: User Id
+                type: string
+              firstname:
+                description: First Name
+                type: string
+              lastname:
+                description: Last Name
+                type: string
+              email:
+                description: Email
+                type: string
+              phone:
+                description: Phone
+                type: string
+            type: object
+    userUpdateRequestBody:
+      description: User body param
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                description: User Id
+                type: string
+              firstname:
+                description: First Name
+                type: string
+              lastname:
+                description: Last Name
+                type: string
+              phone:
+                description: Phone
+                type: string
+              role_id:
+                description: Role Id
+                type: integer
+              has_ubivu_access:
+                description: has_ubivu_access
+                type: boolean
+              has_api_access:
+                description: has_api_access
+                type: boolean
+            type: object
+    userAddRequestBody:
+      description: User body param
+      content:
+        application/json:
+          schema:
+            properties:
+              firstname:
+                description: First Name
+                type: string
+              lastname:
+                description: Last Name
+                type: string
+              email:
+                description: Email
+                type: string
+              phone:
+                description: Phone
+                type: string
+              role_id:
+                description: Role Id
+                type: integer
+              has_ubivu_access:
+                description: has_ubivu_access
+                type: boolean
+              has_api_access:
+                description: has_api_access
+                type: boolean
+            type: object
   schemas:
     User:
       title: User
@@ -349,14 +357,6 @@ components:
           type: string
           format: date-time
       type: object
-  parameters:
-    param_id_string:
-      name: id
-      in: path
-      description: item id
-      required: true
-      schema:
-        type: string
   securitySchemes:
     Api_Key:
       type: apiKey

@@ -223,25 +223,6 @@ paths:
       - Api Key: []
 components:
   responses:
-    successSerialNumberDetailResponse:
-      description: successful operation
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/SerialNumberDetail'
-    checkUploadedProductionFileStatusResponse:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-            - count: integer
-            status: success
-            code: '200'
-            message: Operation success
-            version: value
     paginateGetSerialNumberDetailResponse:
       description: successful operation
       content:
@@ -288,14 +269,17 @@ components:
             code: '200'
             message: Operation success
             version: value
-    404ResourceResponse:
-      description: Item not found
+    checkUploadedProductionFileStatusResponse:
+      description: successful operation
       content:
         application/json:
           example:
-            status: failed
-            code: 404
-            message: Operation failed
+            data:
+            - count: integer
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
     paginateProductionFileDetailResponse:
       description: successful operation
       content:
@@ -329,6 +313,31 @@ components:
             code: '200'
             message: Operation success
             version: value
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+    successSerialNumberDetailResponse:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SerialNumberDetail'
+  requestBodies:
+    SerialNumberDetailRequestBody:
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              csvFile:
+                type: file
+            type: object
   schemas:
     SerialNumberDetail:
       properties:
@@ -344,15 +353,6 @@ components:
           type: string
           format: date-time
       type: object
-  requestBodies:
-    SerialNumberDetailRequestBody:
-      content:
-        multipart/form-data:
-          schema:
-            properties:
-              csvFile:
-                type: file
-            type: object
   securitySchemes:
     Api_Key:
       type: apiKey

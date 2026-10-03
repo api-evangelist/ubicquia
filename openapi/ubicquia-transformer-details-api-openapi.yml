@@ -265,26 +265,6 @@ components:
             code: '200'
             message: Operation success
             version: value
-    404ResourceResponse:
-      description: Item not found
-      content:
-        application/json:
-          example:
-            status: failed
-            code: 404
-            message: Operation failed
-    transformerFileResponse:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-            - url: string
-              fileExtension: string
-            status: success
-            code: '200'
-            message: Operation success
-            version: value
     getTransformerFileDetailResponse:
       description: successful operation
       content:
@@ -318,6 +298,26 @@ components:
             code: '200'
             message: Operation success
             version: value
+    transformerFileResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - url: string
+              fileExtension: string
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
   parameters:
     param_id_string:
       name: id
