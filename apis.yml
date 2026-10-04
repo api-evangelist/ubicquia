@@ -65,6 +65,8 @@ apis:
   humanURL: https://config.api.ubicquia.com/
   baseURL: https://config.api.ubicquia.com/api/
   tags:
+  - Auth Check
+  tags_raw:
   - AuthCheck
   properties:
   - type: OpenAPI
