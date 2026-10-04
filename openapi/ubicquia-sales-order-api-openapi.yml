@@ -154,6 +154,14 @@ paths:
       security:
       - Api Key: []
 components:
+  parameters:
+    param_sales_order_number:
+      name: sales_order_number
+      in: path
+      description: Sales Order Number
+      required: true
+      schema:
+        type: string
   responses:
     salesOrderResponse:
       description: successful operation
@@ -215,6 +223,17 @@ components:
             status: failed
             code: 404
             message: Operation failed
+    successOperation:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - []
+            status: success
+            message: Operation success
+            code: 200
+            version: 0.0.0
     salesOrderResponseConfig:
       description: successful operation
       content:
@@ -234,18 +253,21 @@ components:
             code: '200'
             message: Operation success
             version: value
-    successOperation:
-      description: successful operation
+  requestBodies:
+    SalesOrderDeleteRequestBody:
+      description: Sales Order body param
+      required: true
       content:
         application/json:
-          example:
-            data:
-            - []
-            status: success
-            message: Operation success
-            code: 200
-            version: 0.0.0
-  requestBodies:
+          schema:
+            properties:
+              sales_order_number:
+                description: Sales Order Number
+                type: string
+              customer_id:
+                description: Customer ID
+                type: string
+            type: object
     SalesOrderRequestBody:
       description: Sales Order body param
       required: true
@@ -341,28 +363,6 @@ components:
                       type: string
                   type: object
             type: object
-    SalesOrderDeleteRequestBody:
-      description: Sales Order body param
-      required: true
-      content:
-        application/json:
-          schema:
-            properties:
-              sales_order_number:
-                description: Sales Order Number
-                type: string
-              customer_id:
-                description: Customer ID
-                type: string
-            type: object
-  parameters:
-    param_sales_order_number:
-      name: sales_order_number
-      in: path
-      description: Sales Order Number
-      required: true
-      schema:
-        type: string
   securitySchemes:
     Api_Key:
       type: apiKey

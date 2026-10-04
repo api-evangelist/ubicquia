@@ -253,18 +253,16 @@ paths:
       security:
       - Api Key: []
 components:
-  responses:
-    checkUploadedFileStatusResponse:
-      description: successful operation
+  requestBodies:
+    TransformerDetailRequestBody:
       content:
-        application/json:
-          example:
-            data:
-            - count: integer
-            status: success
-            code: '200'
-            message: Operation success
-            version: value
+        multipart/form-data:
+          schema:
+            properties:
+              csvFile:
+                type: file
+            type: object
+  responses:
     getTransformerFileDetailResponse:
       description: successful operation
       content:
@@ -298,6 +296,14 @@ components:
             code: '200'
             message: Operation success
             version: value
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
     transformerFileResponse:
       description: successful operation
       content:
@@ -310,14 +316,17 @@ components:
             code: '200'
             message: Operation success
             version: value
-    404ResourceResponse:
-      description: Item not found
+    checkUploadedFileStatusResponse:
+      description: successful operation
       content:
         application/json:
           example:
-            status: failed
-            code: 404
-            message: Operation failed
+            data:
+            - count: integer
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
   parameters:
     param_id_string:
       name: id
@@ -326,15 +335,6 @@ components:
       required: true
       schema:
         type: string
-  requestBodies:
-    TransformerDetailRequestBody:
-      content:
-        multipart/form-data:
-          schema:
-            properties:
-              csvFile:
-                type: file
-            type: object
   securitySchemes:
     Api_Key:
       type: apiKey

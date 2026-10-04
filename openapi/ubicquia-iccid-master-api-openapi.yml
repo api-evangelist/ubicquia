@@ -216,103 +216,7 @@ paths:
       security:
       - Api Key: []
 components:
-  responses:
-    iccidMasterLatestLogResponse:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-              original_file_name: iccid_master.csv
-              file_date_uploaded_at: '2026-05-19 14:30:00'
-              latest_information: Success
-              error_count: 0
-              success_count: 100
-              is_completed: true
-            status: success
-            code: '200'
-            message: Operation success
-            version: value
-    getIccidMasterListResponse:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-            - id: 1
-              iccid: '89011703324655860429'
-              eid: string
-              date_added: '2026-05-19 14:30:00'
-              activation_code: ABC123
-              replaced_iccid_sr_num: SR-001
-              replaced_on: '2026-05-20 10:00:00'
-            links:
-              first: http://hostname/api/get-iccid-master-list?page=1
-              last: http://hostname/api/get-iccid-master-list?page=1
-              prev: null
-              next: null
-            meta:
-              current_page: 1
-              from: 1
-              last_page: 1
-              path: http://hostname/api/get-iccid-master-list
-              per_page: 50
-              to: 1
-              total: 1
-            status: success
-            code: '200'
-            message: Operation success
-            version: value
-    404ResourceResponse:
-      description: Item not found
-      content:
-        application/json:
-          example:
-            status: failed
-            code: 404
-            message: Operation failed
-    iccidMasterFailedCsvResponse:
-      description: successful operation
-      content:
-        application/json:
-          example: iccid,status,reason\r\n89011703324655860429,Fail,Invalid row\r\n
-    iccidMasterUpdateResponse:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-              iccid: '89011703324655860429'
-              status: available
-              replaced_by_iccid: null
-              replaced_iccid_sr_num: null
-              replaced_on: null
-              replaced_by: null
-              updated_at: '2026-05-19T14:30:00.000000Z'
-            status: success
-            code: '200'
-            message: ICCID master updated successfully.
-            version: value
-    iccidMasterFileUploadResponse:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data: ''
-            status: success
-            code: '200'
-            message: File Upload successful! Data processing is in progress. Please wait while we process your data in the background.
-            version: value
   requestBodies:
-    IccidMasterFileRequestBody:
-      content:
-        multipart/form-data:
-          schema:
-            properties:
-              csvFile:
-                description: CSV file for ICCID master bulk update or delete
-                type: file
-            type: object
     IccidMasterReplaceRequestBody:
       description: ICCID master status update body
       required: true
@@ -360,6 +264,102 @@ components:
                 format: date-time
                 example: '2026-05-19T14:30:00Z'
             type: object
+    IccidMasterFileRequestBody:
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              csvFile:
+                description: CSV file for ICCID master bulk update or delete
+                type: file
+            type: object
+  responses:
+    getIccidMasterListResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - id: 1
+              iccid: '89011703324655860429'
+              eid: string
+              date_added: '2026-05-19 14:30:00'
+              activation_code: ABC123
+              replaced_iccid_sr_num: SR-001
+              replaced_on: '2026-05-20 10:00:00'
+            links:
+              first: http://hostname/api/get-iccid-master-list?page=1
+              last: http://hostname/api/get-iccid-master-list?page=1
+              prev: null
+              next: null
+            meta:
+              current_page: 1
+              from: 1
+              last_page: 1
+              path: http://hostname/api/get-iccid-master-list
+              per_page: 50
+              to: 1
+              total: 1
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
+    iccidMasterFileUploadResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data: ''
+            status: success
+            code: '200'
+            message: File Upload successful! Data processing is in progress. Please wait while we process your data in the background.
+            version: value
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+    iccidMasterLatestLogResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+              original_file_name: iccid_master.csv
+              file_date_uploaded_at: '2026-05-19 14:30:00'
+              latest_information: Success
+              error_count: 0
+              success_count: 100
+              is_completed: true
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
+    iccidMasterFailedCsvResponse:
+      description: successful operation
+      content:
+        application/json:
+          example: iccid,status,reason\r\n89011703324655860429,Fail,Invalid row\r\n
+    iccidMasterUpdateResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+              iccid: '89011703324655860429'
+              status: available
+              replaced_by_iccid: null
+              replaced_iccid_sr_num: null
+              replaced_on: null
+              replaced_by: null
+              updated_at: '2026-05-19T14:30:00.000000Z'
+            status: success
+            code: '200'
+            message: ICCID master updated successfully.
+            version: value
   securitySchemes:
     Api_Key:
       type: apiKey
