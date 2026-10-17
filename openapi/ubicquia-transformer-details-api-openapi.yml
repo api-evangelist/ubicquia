@@ -263,6 +263,37 @@ components:
                 type: file
             type: object
   responses:
+    checkUploadedFileStatusResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - count: integer
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+    transformerFileResponse:
+      description: successful operation
+      content:
+        application/json:
+          example:
+            data:
+            - url: string
+              fileExtension: string
+            status: success
+            code: '200'
+            message: Operation success
+            version: value
     getTransformerFileDetailResponse:
       description: successful operation
       content:
@@ -292,37 +323,6 @@ components:
               per_page: 20
               to: 2
               total: 2
-            status: success
-            code: '200'
-            message: Operation success
-            version: value
-    404ResourceResponse:
-      description: Item not found
-      content:
-        application/json:
-          example:
-            status: failed
-            code: 404
-            message: Operation failed
-    transformerFileResponse:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-            - url: string
-              fileExtension: string
-            status: success
-            code: '200'
-            message: Operation success
-            version: value
-    checkUploadedFileStatusResponse:
-      description: successful operation
-      content:
-        application/json:
-          example:
-            data:
-            - count: integer
             status: success
             code: '200'
             message: Operation success

@@ -141,21 +141,55 @@ paths:
       operationId: getFulfillmentDetailStatus
       x-operation-id-source: derived
 components:
-  schemas:
-    FulfillmentDetails:
-      properties:
-        customer_id:
-          type: string
-        serial_number:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      type: object
   responses:
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+    successGetFulfillmentDetailsStoreResponse:
+      description: Successful response for getting fulfillment details
+      content:
+        application/json:
+          schema:
+            properties:
+              request_id:
+                description: Request Id of job
+                type: string
+              data:
+                description: The actual data in the response
+                type: string
+              status:
+                description: Status of the response (success, error, etc.)
+                type: string
+              message:
+                description: A message providing additional information about the response
+                type: string
+              code:
+                description: Numeric code representing the status of the response
+                type: integer
+              version:
+                description: API version
+                type: string
+            type: object
+            example:
+              request_id: '65'
+              data: ''
+              status: success
+              message: Fulfillment processing is in progress. Please wait while we process your data in the background.
+              code: 200
+              version: '2'
+    successGetFulfillmentDetailsResponse:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/FulfillmentDetails'
     fulfillmentDetailsLogResponse:
       description: RESPONSE_SUCCESFULL
       content:
@@ -255,56 +289,8 @@ components:
                 type: string
                 example: '2'
             type: object
-    successGetFulfillmentDetailsStoreResponse:
-      description: Successful response for getting fulfillment details
-      content:
-        application/json:
-          schema:
-            properties:
-              request_id:
-                description: Request Id of job
-                type: string
-              data:
-                description: The actual data in the response
-                type: string
-              status:
-                description: Status of the response (success, error, etc.)
-                type: string
-              message:
-                description: A message providing additional information about the response
-                type: string
-              code:
-                description: Numeric code representing the status of the response
-                type: integer
-              version:
-                description: API version
-                type: string
-            type: object
-            example:
-              request_id: '65'
-              data: ''
-              status: success
-              message: Fulfillment processing is in progress. Please wait while we process your data in the background.
-              code: 200
-              version: '2'
-    successGetFulfillmentDetailsResponse:
-      description: successful operation
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/FulfillmentDetails'
-    404ResourceResponse:
-      description: Item not found
-      content:
-        application/json:
-          example:
-            status: failed
-            code: 404
-            message: Operation failed
   requestBodies:
-    createFulfillmentDetailssRequestBody:
+    FulfillmentDetailssRequestBody:
       description: FulfillmentDetails body param
       required: true
       content:
@@ -322,9 +308,6 @@ components:
                 type: array
                 items:
                   type: string
-              fulfillment_id:
-                description: Fulfillment ID
-                type: string
             type: object
     createExtendedFulfillmentDetailssRequestBody:
       description: FulfillmentDetails body param
@@ -358,7 +341,7 @@ components:
                 description: Partner ID
                 type: string
             type: object
-    FulfillmentDetailssRequestBody:
+    createFulfillmentDetailssRequestBody:
       description: FulfillmentDetails body param
       required: true
       content:
@@ -376,7 +359,24 @@ components:
                 type: array
                 items:
                   type: string
+              fulfillment_id:
+                description: Fulfillment ID
+                type: string
             type: object
+  schemas:
+    FulfillmentDetails:
+      properties:
+        customer_id:
+          type: string
+        serial_number:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      type: object
   securitySchemes:
     Api_Key:
       type: apiKey

@@ -36,23 +36,18 @@ paths:
       security:
       - Api Key: []
 components:
-  responses:
-    successSerialNumberDetailResponse:
-      description: successful operation
+  requestBodies:
+    getCustIdRequestBody:
+      description: Get Customer id from dev_eui
+      required: true
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/SerialNumberDetail'
-    404ResourceResponse:
-      description: Item not found
-      content:
-        application/json:
-          example:
-            status: failed
-            code: 404
-            message: Operation failed
+            properties:
+              dev_eui:
+                description: Get Customer Id
+                type: string
+            type: object
   schemas:
     SerialNumberDetail:
       properties:
@@ -68,18 +63,23 @@ components:
           type: string
           format: date-time
       type: object
-  requestBodies:
-    getCustIdRequestBody:
-      description: Get Customer id from dev_eui
-      required: true
+  responses:
+    404ResourceResponse:
+      description: Item not found
+      content:
+        application/json:
+          example:
+            status: failed
+            code: 404
+            message: Operation failed
+    successSerialNumberDetailResponse:
+      description: successful operation
       content:
         application/json:
           schema:
-            properties:
-              dev_eui:
-                description: Get Customer Id
-                type: string
-            type: object
+            type: array
+            items:
+              $ref: '#/components/schemas/SerialNumberDetail'
   securitySchemes:
     Api_Key:
       type: apiKey
